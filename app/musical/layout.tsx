@@ -1,12 +1,4 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond } from "next/font/google";
-
-const cormorant = Cormorant_Garamond({
-  variable: "--font-cormorant",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: "Musical",
@@ -19,5 +11,8 @@ export default function MusicalLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <div className={cormorant.variable}>{children}</div>;
+  // 3.5rem is <SiteNav>'s height.
+  return (
+    <div className="min-h-[calc(100vh-3.5rem)] bg-paper-warm">{children}</div>
+  );
 }

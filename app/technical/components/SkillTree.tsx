@@ -1,148 +1,214 @@
 "use client";
 
-import { useState } from "react";
-import SkillNode from "./SkillNode";
-import { skills as skillsData } from "./skills";
-import { connections } from "./connections";
+import { useEffect, useState } from "react";
+import { X } from "lucide-react";
+import PixelSprite from "@/components/PixelSprite";
+import { cn } from "@/lib/utils";
+import { LANE_GLYPHS } from "../data/pixel";
+import { TIERS, type Tier, findSkill, lanes } from "../data/skills";
+
+/** Tier is the whole progression model — it replaced the old `unlocked` flag. */
+const marker: Record<Tier, string> = {
+  3: "border-solid border-tech bg-tech text-white",
+  2: "border-solid border-tech bg-tech/25 text-paper",
+  1: "border-dashed border-tech/60 text-paper",
+};
 
 export default function SkillTree() {
-    const [skills, setSkills] = useState(skillsData);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [hoverId, setHoverId] = useState<string | null>(null);
+  const active = findSkill(hoverId ?? selectedId ?? "");
 
-    const unlockNode = (id: string) => {
-        setSkills((prev) =>
-            prev.map((node) =>
-                node.id === id ? { ...node, unlocked: !node.unlocked } : node
-            )
-        );
-    };
+  useEffect(() => {
+    if (!selectedId) return;
+    const close = (event: KeyboardEvent) =>
+      event.key === "Escape" && setSelectedId(null);
+    document.addEventListener("keydown", close);
+    return () => document.removeEventListener("keydown", close);
+  }, [selectedId]);
 
-    return (
+  return (
+    <section className="pixel-grid rounded-lg border border-ink-soft bg-ink-deep p-4 sm:p-6">
+      <header className="mb-5 flex flex-wrap items-end justify-between gap-5">
+        <h2 className="font-pixel text-xl tracking-wide [text-shadow:2px_2px_0_var(--color-tech)]">
+          SKILL TREE
+        </h2>
+        <ul className="flex gap-5 border border-ink-soft bg-ink/60 px-3.5 py-2.5">
+          {([3, 2, 1] as Tier[]).map((tier) => (
+            <li key={tier} className="flex items-center gap-2">
+              <span
+                aria-hidden="true"
+                className={cn("size-3.5 border-2", marker[tier])}
+              />
+              <span className="text-[10.5px] tracking-[0.08em] text-paper uppercase">
+                {TIERS[tier]}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </header>
 
-        <div className="w-full h-screen bg-[#242038] overflow-auto">
+      <div className="flex items-start gap-6">
+        {/* Five lanes never fit at once by design — they snap horizontally.
+            The thin scrollbar and the fade at the trailing edge are what say so. */}
+        <div className="relative min-w-0 flex-1">
+          <span
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-y-0 right-0 z-1 w-12 bg-linear-to-l from-ink-deep to-transparent"
+          />
+          <div className="flex snap-x snap-mandatory gap-7 overflow-x-auto pb-4 [scrollbar-color:var(--color-ink-soft)_transparent] [scrollbar-width:thin]">
+            {lanes.map((lane) => (
+              <div
+                key={lane.id}
+                className="min-w-[240px] flex-1 shrink-0 snap-start"
+              >
+                <h3 className="mb-4 flex items-center gap-2 font-pixel text-xs tracking-wide text-tech">
+                  <PixelSprite
+                    layers={LANE_GLYPHS[lane.id]}
+                    className="size-4 shrink-0"
+                  />
+                  {lane.name.toUpperCase()}
+                </h3>
 
-            {/* Legend */}
-            <div className="fixed top-8 right-8 bg-[#242038] border-2 border-[#8D86C9] rounded-lg p-4 shadow-xl z-50">
-                <h3 className="text-white font-bold text-lg mb-3">Skill Categories</h3>
-                <div className="space-y-2">
-                    <div className="flex items-center gap-3">
-                        <div className="w-6 h-6 rounded-full border-3" style={{ borderColor: "#FFBF00", borderWidth: "3px", boxShadow: "0 0 10px #FFBF0080" }}></div>
-                        <span className="text-white text-sm">Foundations</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                        <div className="w-6 h-6 rounded-full border-3" style={{ borderColor: "#F4A261", borderWidth: "3px", boxShadow: "0 0 10px #F4A26180" }}></div>
-                        <span className="text-white text-sm">Hub</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                        <div className="w-6 h-6 rounded-full border-3" style={{ borderColor: "#9B5DE5", borderWidth: "3px", boxShadow: "0 0 10px #9B5DE580" }}></div>
-                        <span className="text-white text-sm">Academic</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                        <div className="w-6 h-6 rounded-full border-3" style={{ borderColor: "#4361EE", borderWidth: "3px", boxShadow: "0 0 10px #4361EE80" }}></div>
-                        <span className="text-white text-sm">Systems/Game Design</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                        <div className="w-6 h-6 rounded-full border-3" style={{ borderColor: "#3ECF8E", borderWidth: "3px", boxShadow: "0 0 10px #3ECF8E80" }}></div>
-                        <span className="text-white text-sm">Web Dev</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                        <div className="w-6 h-6 rounded-full border-3" style={{ borderColor: "#FF6B6B", borderWidth: "3px", boxShadow: "0 0 10px #FF6B6B80" }}></div>
-                        <span className="text-white text-sm">UI/UX</span>
-                    </div>
-                </div>
-            </div>
-
-            <div
-                className="relative w-full h-[1500px] mx-auto rounded-xl overflow-hidden"
-                style={{
-                    background: `
-            radial-gradient(circle at 15% 20%, rgba(155, 93, 229, 0.25) 0%, transparent 35%),
-            radial-gradient(circle at 85% 15%, rgba(67, 97, 238, 0.2) 0%, transparent 40%),
-            radial-gradient(circle at 70% 80%, rgba(62, 207, 142, 0.18) 0%, transparent 45%),
-            radial-gradient(circle at 30% 75%, rgba(255, 107, 107, 0.15) 0%, transparent 38%),
-            radial-gradient(circle at 50% 50%, rgba(244, 162, 97, 0.12) 0%, transparent 55%),
-            radial-gradient(ellipse at 40% 10%, rgba(255, 255, 255, 0.03) 0%, transparent 30%),
-            radial-gradient(ellipse at 80% 90%, rgba(255, 255, 255, 0.02) 0%, transparent 25%),
-            linear-gradient(135deg, #0f0a1a 0%, #1a1626 25%, #242038 50%, #2d2545 75%, #1e1b2e 100%)
-          `,
-                    boxShadow: `
-            inset 0 0 100px rgba(155, 93, 229, 0.1),
-            inset 0 0 50px rgba(67, 97, 238, 0.08),
-            0 0 50px rgba(0, 0, 0, 0.5)
-          `,
-                }}
-            >
-                {/* Title inside the tree container */}
-                <div className="absolute top-8 left-1/8 -translate-x-1/2 z-40 text-left">
-                    <h1
-                        className="text-5xl font-bold text-white tracking-wider"
-                        style={{
-                            textShadow: `
-                0 0 20px rgba(155, 93, 229, 0.8),
-                0 0 40px rgba(67, 97, 238, 0.6),
-                0 0 60px rgba(155, 93, 229, 0.4),
-                2px 2px 4px rgba(0, 0, 0, 0.8)
-              `,
-                        }}
-                    >
-                        SKILL TREE
-                    </h1>
-                    <div
-                        className="h-1 w-48 mt-2 rounded-full mx-auto"
-                        style={{
-                            background: 'linear-gradient(90deg, rgba(155, 93, 229, 0.8) 0%, rgba(67, 97, 238, 0.6) 50%, transparent 100%)',
-                            boxShadow: '0 0 10px rgba(155, 93, 229, 0.6)',
-                        }}
-                    />
-                </div>
-                {/* SVG for connections */}
-                <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 1 }}>
-                    <defs>
-                        <filter id="glow">
-                            <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
-                            <feMerge>
-                                <feMergeNode in="coloredBlur"/>
-                                <feMergeNode in="SourceGraphic"/>
-                            </feMerge>
-                        </filter>
-                    </defs>
-                    {connections.map(([a, b], index) => {
-                        const nodeA = skills.find((s) => s.id === a);
-                        const nodeB = skills.find((s) => s.id === b);
-
-                        if (!nodeA || !nodeB) {
-                            console.warn(`Connection not found: ${a} -> ${b}`);
-                            return null;
-                        }
-
-                        // Fade connections if either node is locked
-                        const bothUnlocked = nodeA.unlocked && nodeB.unlocked;
-                        const color = bothUnlocked ? "#9067C6" : "#4a5568";
-                        const opacity = bothUnlocked ? 0.8 : 0.3;
-
-                        return (
-                            <line
-                                key={`${a}-${b}-${index}`}
-                                x1={nodeA.x}
-                                y1={nodeA.y}
-                                x2={nodeB.x}
-                                y2={nodeB.y}
-                                stroke={color}
-                                strokeWidth="3"
-                                opacity={opacity}
-                                filter={bothUnlocked ? "url(#glow)" : "none"}
-                                strokeLinecap="round"
-                            />
-                        );
-                    })}
-                </svg>
-
-                {/* Render nodes */}
-                <div style={{ position: 'relative', zIndex: 2 }}>
-                    {skills.map((skill) => (
-                        <SkillNode key={skill.id} data={skill} onClick={unlockNode} />
-                    ))}
-                </div>
-            </div>
+                <ul className="relative flex flex-col gap-3">
+                  {/* Dotted spine, centred behind the 40px markers. */}
+                  <span
+                    aria-hidden="true"
+                    className="absolute top-2 bottom-2 left-[19px] w-0.5 bg-[repeating-linear-gradient(180deg,var(--color-tech)_0_6px,transparent_6px_12px)] opacity-40"
+                  />
+                  {lane.skills.map((skill) => {
+                    const pinned = skill.id === selectedId;
+                    return (
+                      <li key={skill.id} className="relative">
+                        <button
+                          type="button"
+                          aria-pressed={pinned}
+                          onClick={() =>
+                            setSelectedId(pinned ? null : skill.id)
+                          }
+                          onPointerEnter={() => setHoverId(skill.id)}
+                          onPointerLeave={() => setHoverId(null)}
+                          onFocus={() => setHoverId(skill.id)}
+                          onBlur={() => setHoverId(null)}
+                          className={cn(
+                            "flex w-full cursor-pointer items-center gap-3 py-1.5 pr-2 text-left outline-none",
+                            "transition-colors duration-150 hover:bg-tech/15 focus-visible:bg-tech/15",
+                            "focus-visible:ring-2 focus-visible:ring-tech-soft",
+                            pinned && "bg-tech/15 ring-2 ring-tech",
+                          )}
+                        >
+                          <span
+                            aria-hidden="true"
+                            className={cn(
+                              "flex size-10 shrink-0 items-center justify-center border-2 font-pixel text-[11px]",
+                              marker[skill.tier],
+                            )}
+                          >
+                            {skill.abbr}
+                          </span>
+                          <span className="flex flex-col gap-1">
+                            <span className="font-mono text-[12.5px]/[1.3] font-medium text-paper">
+                              {skill.label}
+                            </span>
+                            <span className="font-mono text-[9.5px] tracking-[0.06em] text-tech uppercase">
+                              {skill.source}
+                            </span>
+                          </span>
+                        </button>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            ))}
+          </div>
         </div>
-    );
+
+        <aside className="sticky top-20 hidden w-[280px] shrink-0 border-2 border-ink-soft bg-ink p-5 lg:block">
+          {active ? (
+            <Detail {...active} />
+          ) : (
+            <div className="flex flex-col items-center gap-4 py-12 text-center">
+              <span
+                aria-hidden="true"
+                className="flex size-10 items-center justify-center border-2 border-dashed border-ink-soft font-pixel text-sm text-on-dark-soft"
+              >
+                ?
+              </span>
+              <p className="max-w-[200px] text-[13px] text-on-dark-soft">
+                Hover a node to read it. Click to pin it here.
+              </p>
+            </div>
+          )}
+        </aside>
+      </div>
+
+      <p className="mt-4 font-mono text-[9.5px] tracking-[0.1em] text-on-dark-soft uppercase">
+        Header sprites adapted from{" "}
+        <a
+          href="https://pxlkit.xyz"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="rounded-sm underline outline-none hover:text-tech focus-visible:ring-2 focus-visible:ring-tech"
+        >
+          PxlKit
+        </a>
+      </p>
+
+      {/* Below lg there is no rail and no hover, so a pinned node opens here. */}
+      {selectedId && active && (
+        <div
+          role="dialog"
+          aria-label={`${active.skill.label} detail`}
+          className="fixed inset-x-0 bottom-0 z-60 border-t-2 border-tech bg-ink p-5 shadow-float lg:hidden"
+        >
+          <button
+            type="button"
+            onClick={() => setSelectedId(null)}
+            className="float-right cursor-pointer border border-ink-soft p-1.5 text-paper outline-none hover:border-tech focus-visible:ring-2 focus-visible:ring-tech"
+          >
+            <X aria-hidden="true" className="size-4" />
+            <span className="sr-only">Close</span>
+          </button>
+          <Detail {...active} />
+        </div>
+      )}
+    </section>
+  );
+}
+
+function Detail({ skill, lane }: NonNullable<ReturnType<typeof findSkill>>) {
+  return (
+    <>
+      <p className="mb-2.5 font-mono text-[10.5px] tracking-[0.12em] text-tech uppercase">
+        {lane.name}
+      </p>
+      <h3 className="mb-3.5 font-pixel text-[17px]/[1.35]">{skill.label}</h3>
+
+      <p className="mb-3.5 flex items-center gap-2.5">
+        <span aria-hidden="true" className="inline-flex gap-1">
+          {[1, 2, 3].map((pip) => (
+            <span
+              key={pip}
+              className={cn(
+                "size-2 border",
+                pip <= skill.tier ? "border-tech bg-tech" : "border-ink-soft",
+              )}
+            />
+          ))}
+        </span>
+        <span className="font-mono text-[11px] font-semibold">
+          {TIERS[skill.tier]}
+        </span>
+        <span className="font-mono text-[11px] text-on-dark-soft">
+          since {skill.year}
+        </span>
+      </p>
+
+      <p className="mb-4 text-sm/[1.65] text-on-dark">{skill.blurb}</p>
+      <p className="inline-block border border-tech/55 px-2.5 py-1 font-mono text-[11px] text-tech">
+        {skill.source}
+      </p>
+    </>
+  );
 }

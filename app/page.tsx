@@ -1,142 +1,80 @@
-export default function Home() {
-    return (
-        <main className="min-h-screen bg-[#CAC4CE] flex items-center justify-center px-6 py-10">
-            <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+import Image from "next/image";
+import Link from "next/link";
+import PageShell from "@/components/PageShell";
+import { buttonVariants } from "@/components/ui/button";
+import { entryPoints } from "./entry-points";
 
-                {/* LEFT SIDE — TEXT */}
-                <section>
-                    <h1 className="text-6xl font-bold text-[#242038] mb-4">
-                        Hi, I’m <span className="text-[#242038] text-shadow-2xs text-shadow-amber-950">Spencer Bowden!</span>
-                    </h1>
+const bio =
+  "I'm a software engineer and music director, and I've stopped treating those as two separate résumés. I'm finishing a double degree in Cognitive Studies and Computer Science at Vanderbilt, with a minor in Music. Most of what I do is translation: turning a messy system into something a user trusts in one glance, or turning a score into something a cast trusts on stage. Same instinct, different material.";
 
-                    <p className="text-lg text-gray-700 leading-relaxed mb-10">
-                        Software Engineer, Music Director, driven academic, lifelong advocate of learning and curiosity. I build systems, tools, and experiences that make complex things feel not only simple and seamless, but fun. Currently studying Cognitive Studies and Computer Science at Vanderbilt University with a minor in Music.
-                    </p>
+export default function LandingPage() {
+  return (
+    <PageShell className="md:py-24">
+      <div className="flex flex-col items-center gap-10 md:flex-row md:gap-16">
+        <div className="order-1 w-[clamp(11.25rem,20vw,16.25rem)] shrink-0 md:order-2">
+          <div className="relative aspect-square overflow-hidden rounded-full border-4 border-surface shadow-float">
+            <Image
+              src="/images/me.jpg"
+              alt="Spencer Bowden"
+              fill
+              priority
+              sizes="(min-width: 768px) 260px, 180px"
+              className="object-cover"
+            />
+          </div>
+        </div>
 
-                    {/* LINK BUTTONS WITH HOVER ANIMATIONS */}
-                    <div className="flex gap-6 mt-6">
+        <section className="order-2 flex flex-col items-center text-center md:order-1 md:items-start md:text-left">
+          <h1 className="font-display text-display font-semibold text-balance">
+            Hey guys! I&rsquo;m Spencer Bowden.
+          </h1>
+          <p className="mt-2 mb-6 text-[13px] font-semibold tracking-[0.08em] text-ink-soft uppercase">
+            Tech. Music. Joy.
+          </p>
+          <p className="max-w-130 text-base/[1.7] text-ink-soft md:text-lg/[1.7]">
+            {bio}
+          </p>
 
-                        {/* TECHNICAL */}
-                        <div className="relative group">
-                            <a
-                                href="/technical"
-                                className="px-5 py-3 rounded-md bg-[#8D86C9] text-black font-medium
-                hover:bg-[#9067C6] hover:text-white transition"
-                            >
-                                Technical
-                            </a>
+          {/* The single row exists to stage the hover icons, which no touch
+              device will ever see — so small screens get a 2×2 grid of
+              properly tappable targets instead of four cramped chips. */}
+          <nav
+            aria-label="Sections"
+            className="mt-8 grid w-full grid-cols-2 gap-3 sm:flex sm:w-auto sm:flex-wrap"
+          >
+            {entryPoints.map((entry) => (
+              <div key={entry.href} className="group relative">
+                <Link
+                  href={entry.href}
+                  className={buttonVariants({
+                    tone: entry.tone,
+                    className:
+                      "w-full px-3 text-[clamp(0.875rem,2.4vw,1rem)] font-bold sm:w-auto sm:px-5",
+                  })}
+                >
+                  {entry.label}
+                </Link>
 
-                            {/* Hover Animation — Code Icon */}
-                            <img
-                                src="/images/computer_hover_icon.png"
-                                alt="code icon"
-                                className="
-                                pointer-events-none
-                                absolute left-1/2 -translate-x-1/2 w-18 mt-6
-                                opacity-0 translate-y-4
-                                transition-all duration-700 ease-out
-                                group-hover:opacity-100
-                                group-hover:translate-y-0
-                                group-hover:animate-floatSlow
-                                drop-shadow-[0_0_6px_#9067C6]
-                                group-hover:drop-shadow-[0_0_14px_#9067C6]
-  "
-                            />
-                        </div>
-
-                        {/* MUSICAL */}
-                        <div className="relative group">
-                            <a
-                                href="/musical"
-                                className="px-5 py-3 rounded-md bg-[#87BFA5] text-black font-medium
-                hover:bg-[#6FAF8F] hover:text-white transition"
-                            >
-                                Musical
-                            </a>
-
-                            {/* Hover Animation — Music Icon */}
-                            <img
-                                src="/images/piano_hover_icon.png"
-                                alt="music icon"
-                                className="
-                                pointer-events-none
-                                absolute left-1/2 -translate-x-1/2 w-38 mt-6
-                                opacity-0 translate-y-4
-                                transition-all duration-700 ease-out
-                                group-hover:opacity-100
-                                group-hover:translate-y-0
-                                group-hover:animate-floatSlow
-                                drop-shadow-[0_0_6px_ #6FAF8F]
-                                group-hover:drop-shadow-[0_0_12px_#6FAF8F]
-                                "
-                            />
-                        </div>
-
-                        {/* RESUME */}
-                        <div className="relative group">
-                            <a
-                                href="/resume"
-                                className="px-5 py-3 rounded-md bg-[#FFD76A] text-black font-medium
-                hover:bg-[#FFBF00] hover:text-white transition"
-                            >
-                                Résumé
-                            </a>
-
-                            {/* Hover Animation — Book Icon */}
-                            <img
-                                src="/images/book_hover_icon.png"
-                                alt="book icon"
-                                className=" pointer-events-none
-                                absolute left-1/2 -translate-x-1/2 mt-3 w-24 opacity-0
-                                translate-y-4
-                                transition-all duration-700 ease-out
-                                group-hover:opacity-100
-                                group-hover:translate-y-0
-                                group-hover:animate-floatSlow
-                                drop-shadow-[0_0_6px_#FFBF00]
-                                group-hover:drop-shadow-[0_0_14px_#FFBF00]"
-                            />
-                        </div>
-                        {/* CONTACT */}
-                        <div className="relative group">
-                            <a
-                                href="/contact"
-                                className="group px-5 py-3 rounded-md bg-[#B56C8C]
-                                text-[#242038] font-medium
-                                hover:bg-[#9E5677] hover:text-white transition"
-                            >
-                                Contact
-                            </a>
-                            <img
-                                src="/images/phone_hover_icon.png"
-                                alt="phone icon"
-                                className="
-                                pointer-events-none
-                                absolute left-1/2 -translate-x-1/2 mt-4 w-48
-                                opacity-0 translate-y-3
-                                transition-all duration-700 ease-out
-                                group-hover:opacity-100
-                                group-hover:translate-y-0
-                                group-hover:animate-floatSlow
-                                drop-shadow-[0_0_6px_#9E5677]
-                                group-hover:drop-shadow-[0_0_14px_#9E5677]
-                                "
-                            />
-                        </div>
-
-                    </div>
-                </section>
-
-                {/* RIGHT — PHOTO */}
-                <section className="relative flex justify-center">
-                    <img
-                        src="/images/me.jpg"
-                        alt="Spencer Bowden"
-                        className="w-64 h-64 object-cover rounded-full shadow-lg border-4 border-white"
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute top-full left-1/2 mt-2.5 -translate-x-1/2"
+                  style={{ width: `${entry.scale}%`, maxWidth: entry.maxWidth }}
+                >
+                  <span className="block translate-y-2.5 opacity-0 transition-[opacity,transform] duration-300 ease-out group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:translate-y-0 group-focus-within:opacity-100">
+                    <Image
+                      src={entry.icon}
+                      alt=""
+                      width={140}
+                      height={140}
+                      className="w-full group-hover:animate-floatSlow"
                     />
-                </section>
-
-            </div>
-        </main>
-    );
+                  </span>
+                </span>
+              </div>
+            ))}
+          </nav>
+        </section>
+      </div>
+    </PageShell>
+  );
 }

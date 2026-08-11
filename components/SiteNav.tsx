@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { routes } from "@/lib/routes";
-import { cn } from "@/lib/cn";
+import { cn } from "@/lib/utils";
 
 /**
  * The site's only navigation. Identical on every route — same background, same
@@ -19,11 +19,6 @@ export default function SiteNav() {
 
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
-
-  // Close on route change.
-  useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
 
   // Escape closes the panel and returns focus to the toggle.
   useEffect(() => {
@@ -54,8 +49,7 @@ export default function SiteNav() {
     };
   }, [open]);
 
-  // No padding here on purpose — callers set their own. `cn` does not resolve
-  // conflicting Tailwind utilities until tailwind-merge is installed.
+  // No padding here on purpose — callers set their own.
   const linkBase =
     "relative text-sm outline-none transition-colors duration-200 rounded-sm " +
     "focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 " +
@@ -65,20 +59,21 @@ export default function SiteNav() {
     <header className="sticky top-0 z-50 bg-ink">
       <nav
         aria-label="Main"
-        className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6"
+        className="flex h-14 items-center justify-between px-4 sm:px-6 md:px-8"
       >
         <Link
           href="/"
           className={cn(
             linkBase,
-            "py-2 font-medium text-white hover:text-white/80 active:text-white/60"
+            "py-2 font-display text-[19px] font-semibold tracking-tight text-white",
+            "hover:text-white/80 active:text-white/60",
           )}
         >
           Spencer Bowden
         </Link>
 
         {/* Desktop */}
-        <ul className="hidden items-center gap-6 md:flex">
+        <ul className="hidden items-center gap-8 md:flex">
           {routes.map((route) => {
             const active = isActive(route.href);
             return (
@@ -91,17 +86,17 @@ export default function SiteNav() {
                     "block py-2",
                     active
                       ? "text-white"
-                      : "text-white/65 hover:text-white active:text-white/80"
+                      : "text-white/65 hover:text-white active:text-white/80",
                   )}
                 >
                   {route.label}
                   <span
                     aria-hidden="true"
                     className={cn(
-                      "absolute inset-x-0 -bottom-0.5 h-[3px] origin-left rounded-full",
+                      "absolute inset-x-0 -bottom-0.5 h-0.75 origin-left rounded-full",
                       "transition-transform duration-200 ease-out",
                       route.accent,
-                      active ? "scale-x-100" : "scale-x-0"
+                      active ? "scale-x-100" : "scale-x-0",
                     )}
                   />
                 </Link>
@@ -120,7 +115,7 @@ export default function SiteNav() {
           aria-label={open ? "Close menu" : "Open menu"}
           className={cn(
             linkBase,
-            "-mr-2 p-2 text-white hover:text-white/80 active:text-white/60 md:hidden"
+            "-mr-2 p-2 text-white hover:text-white/80 active:text-white/60 md:hidden",
           )}
         >
           <svg
@@ -155,25 +150,26 @@ export default function SiteNav() {
           ref={panelRef}
           className="border-t border-white/10 bg-ink md:hidden"
         >
-          <ul className="mx-auto max-w-6xl px-4 py-2 sm:px-6">
+          <ul className="px-4 py-2 sm:px-6 md:px-8">
             {routes.map((route) => {
               const active = isActive(route.href);
               return (
                 <li key={route.href}>
                   <Link
                     href={route.href}
+                    onClick={() => setOpen(false)}
                     aria-current={active ? "page" : undefined}
                     className={cn(
                       linkBase,
                       "flex items-center gap-3 py-3",
-                      active ? "text-white" : "text-white/65 hover:text-white"
+                      active ? "text-white" : "text-white/65 hover:text-white",
                     )}
                   >
                     <span
                       aria-hidden="true"
                       className={cn(
-                        "h-4 w-[3px] rounded-full",
-                        active ? route.accent : "bg-transparent"
+                        "h-4 w-0.75 rounded-full",
+                        active ? route.accent : "bg-transparent",
                       )}
                     />
                     {route.label}

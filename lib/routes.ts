@@ -12,7 +12,7 @@ export type Route = {
 };
 
 export const routes: Route[] = [
-  { href: "/", label: "Home", accent: "bg-ink-soft" },
+  { href: "/", label: "Home", accent: "bg-paper" },
   { href: "/technical", label: "Technical", accent: "bg-tech" },
   { href: "/musical", label: "Musical", accent: "bg-music" },
   { href: "/resume", label: "Résumé", accent: "bg-resume" },

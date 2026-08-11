@@ -1,14 +1,4 @@
 import type { Metadata } from "next";
-import { Silkscreen } from "next/font/google";
-
-// Scoped here rather than in the root layout so Silkscreen only downloads on
-// /technical. Same reasoning for Cormorant on /musical.
-const silkscreen = Silkscreen({
-  variable: "--font-silkscreen",
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: "Technical",
@@ -21,5 +11,11 @@ export default function TechnicalLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <div className={silkscreen.variable}>{children}</div>;
+  // Technical is the one dark room in the house, and its background lives here
+  // rather than on any page. 3.5rem is <SiteNav>'s height.
+  return (
+    <div className="min-h-[calc(100vh-3.5rem)] bg-ink text-white">
+      {children}
+    </div>
+  );
 }

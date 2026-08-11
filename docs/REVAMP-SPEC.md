@@ -63,6 +63,13 @@ Tailwind v4 has no `tailwind.config.ts`. Custom colors go in an `@theme` block i
 
 ### Color
 
+**shadcn/ui's `init` appended its own neutral `oklch()` palette to `globals.css`**
+(`--primary`, `--accent`, `--border`, `--sidebar-*`, a `.dark` block, etc). That palette
+is scaffolding, not design — never the source of a visible color. If a shadcn component
+is used anywhere, override its default classes with the tokens below (a shadcn `Button`
+gets `bg-tech`, not `bg-primary`). See the comment above the `@theme` block in
+`globals.css` for the long version.
+
 ```css
 @theme {
   /* Structure */
