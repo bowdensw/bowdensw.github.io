@@ -7,7 +7,7 @@ import { TabList, TabPanel, type Tab } from "@/components/Tabs";
 import About from "./components/About";
 import Projects from "./components/Projects";
 import SkillTree from "./components/SkillTree";
-import { MAGIC_ORB, RETRO_TV } from "./data/pixel";
+import { HEADER_SPRITES } from "./data/pixel";
 
 const tabs: Tab[] = [
   { id: "about", label: "About" },
@@ -23,14 +23,12 @@ export default function TechnicalPage() {
   return (
     <PageShell width="xwide">
       <header className="mb-10 flex flex-col items-center gap-6 md:flex-row md:justify-between">
-        <Frame
-          layers={MAGIC_ORB}
-          label="Pixel-art magic orb"
-          className="hidden md:block"
-        />
+        <Frame {...HEADER_SPRITES.orb} className="hidden md:block" />
 
         <div className="flex flex-col items-center text-center">
-          <h1 className="mb-3 font-pixel text-display tracking-[0.05em] [text-shadow:4px_4px_0_var(--color-tech)]">
+          {/* Press Start 2P runs about twice the advance width of Silkscreen,
+              so this is sized well below the shared --text-display. */}
+          <h1 className="mb-3 font-pixel text-[clamp(1.125rem,3vw,1.875rem)] leading-tight tracking-[0.05em] [text-shadow:4px_4px_0_var(--color-tech)]">
             TECHNICAL
           </h1>
           <span
@@ -49,11 +47,7 @@ export default function TechnicalPage() {
           </ul>
         </div>
 
-        <Frame
-          layers={RETRO_TV}
-          label="Pixel-art retro television"
-          className="order-first md:order-0"
-        />
+        <Frame {...HEADER_SPRITES.tv} className="order-first md:order-0" />
       </header>
 
       <TabList

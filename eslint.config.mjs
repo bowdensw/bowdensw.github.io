@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Claude Design mockups: reference material, plus a generated runtime.
+    "docs/mockups/**",
   ]),
 ]);
 

@@ -19,7 +19,7 @@ export default function MusicalPage() {
   return (
     <PageShell width="medium">
       <header className="mb-7 text-center">
-        <h1 className="font-score text-display font-semibold text-music-deep italic">
+        <h1 className="inline-block border-b-2 border-music pb-1 font-score text-display font-semibold text-music-deep italic">
           Musical
         </h1>
         <p className="mt-1.5 text-[13px] tracking-[0.12em] text-ink-soft uppercase">

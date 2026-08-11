@@ -1,9 +1,15 @@
 import { buttonVariants } from "@/components/ui/button";
-import { CONTACT_EMAIL, PRICE, mailto, sessions } from "../data/mainstage";
+import { PRICE, mailto, sessions } from "../data/mainstage";
+
+/* Rows rather than the mockup's card grid, to match the Shows table — the two
+   tabs list the same kind of thing and should scan the same way. */
+const columns = "sm:grid-cols-[2fr_1.7fr_auto_auto]";
+const heading =
+  "text-[11.5px] font-bold tracking-[0.06em] text-music-deep uppercase";
 
 export default function Mainstage() {
   return (
-    <div className="mx-auto max-w-[680px]">
+    <div>
       <header className="mb-8 text-center">
         <h2 className="mb-3 font-score text-[28px] font-semibold text-music-deep italic">
           MainStage session files
@@ -15,25 +21,32 @@ export default function Mainstage() {
         </p>
       </header>
 
-      <ul className="grid gap-4 sm:grid-cols-2">
+      <div
+        className={`hidden gap-4 border-b-2 border-music-deep px-1 pb-2.5 sm:grid ${columns}`}
+        aria-hidden="true"
+      >
+        <span className={heading}>Production</span>
+        <span className={heading}>Includes</span>
+        <span className={heading}>Price</span>
+        <span />
+      </div>
+
+      <ul>
         {sessions.map((session) => (
           <li
             key={session.title}
-            className="flex flex-col gap-3.5 rounded-xl border border-music/35 bg-surface p-5"
+            className={`grid items-start gap-3 border-b border-ink-soft/15 px-1 py-4 sm:gap-4 ${columns}`}
           >
-            <div className="flex items-start justify-between gap-3">
-              <div>
-                <h3 className="font-score text-[19px]/[1.25] font-semibold italic">
-                  {session.title}
-                </h3>
-                <p className="mt-1 text-[12.5px] text-ink-soft">
-                  {session.meta}
-                </p>
-              </div>
-              <p className="shrink-0 font-semibold text-music-deep">{PRICE}</p>
+            <div>
+              <h3 className="font-score text-[17px]/[1.3] font-semibold italic sm:text-[15.5px]">
+                {session.title}
+              </h3>
+              <p className="mt-0.5 text-[12.5px] text-ink-soft">
+                {session.meta}
+              </p>
             </div>
 
-            <ul className="mt-auto flex flex-wrap gap-1.5">
+            <ul className="flex flex-wrap gap-1.5">
               {session.tags.map((tag) => (
                 <li
                   key={tag}
@@ -44,12 +57,16 @@ export default function Mainstage() {
               ))}
             </ul>
 
+            <p className="font-semibold whitespace-nowrap text-music-deep">
+              {PRICE}
+            </p>
+
             <a
               href={mailto(`MainStage session — ${session.title}`)}
               className={buttonVariants({
                 tone: "music",
                 size: "sm",
-                className: "w-full",
+                className: "justify-self-start whitespace-nowrap",
               })}
             >
               Request this session
@@ -58,7 +75,7 @@ export default function Mainstage() {
         ))}
       </ul>
 
-      <p className="mt-8 flex flex-wrap items-center justify-center gap-2 border-t border-ink-soft/15 pt-6 text-sm text-ink-soft">
+      <p className="mt-8 flex flex-wrap items-center justify-center gap-2 pt-2 text-sm text-ink-soft">
         Need a show that isn&rsquo;t listed? I build custom sessions too.
         <a
           href={mailto("Custom MainStage session")}
@@ -66,17 +83,6 @@ export default function Mainstage() {
         >
           Ask about a custom build
         </a>
-      </p>
-
-      <p className="mt-4 text-center text-xs text-ink-soft">
-        Sessions are delivered by hand — email{" "}
-        <a
-          href={mailto("MainStage sessions")}
-          className="rounded-sm underline underline-offset-2 outline-none hover:text-music-deep focus-visible:ring-2 focus-visible:ring-music-deep"
-        >
-          {CONTACT_EMAIL}
-        </a>{" "}
-        and I&rsquo;ll send the file and book a setup call.
       </p>
     </div>
   );

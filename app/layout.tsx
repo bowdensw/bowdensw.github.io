@@ -4,7 +4,7 @@ import {
   Fraunces,
   Geist,
   Geist_Mono,
-  Silkscreen,
+  Press_Start_2P,
 } from "next/font/google";
 import SiteNav from "@/components/SiteNav";
 import "./globals.css";
@@ -15,7 +15,7 @@ import "./globals.css";
  * :root. A var() that resolves to nothing there invalidates the whole
  * declaration and silently drops the page to a serif fallback.
  *
- * Silkscreen and Cormorant belong to one section each, so they skip preload —
+ * Press Start 2P and Cormorant belong to one section each, so they skip preload —
  * their files are fetched only on the routes that actually render them.
  */
 const geistSans = Geist({
@@ -36,10 +36,10 @@ const fraunces = Fraunces({
   display: "swap",
 });
 
-const silkscreen = Silkscreen({
-  variable: "--font-silkscreen",
+const pressStart = Press_Start_2P({
+  variable: "--font-press-start",
   subsets: ["latin"],
-  weight: ["400", "700"],
+  weight: "400",
   display: "swap",
   preload: false,
 });
@@ -56,7 +56,7 @@ const fontVariables = [
   geistSans.variable,
   geistMono.variable,
   fraunces.variable,
-  silkscreen.variable,
+  pressStart.variable,
   cormorant.variable,
 ].join(" ");
 

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { X } from "lucide-react";
 import PixelSprite from "@/components/PixelSprite";
 import { cn } from "@/lib/utils";
-import { LANE_GLYPHS } from "../data/pixel";
+import { LANE_ICONS } from "../data/pixel";
 import { TIERS, type Tier, findSkill, lanes } from "../data/skills";
 
 /** Tier is the whole progression model — it replaced the old `unlocked` flag. */
@@ -30,7 +30,7 @@ export default function SkillTree() {
   return (
     <section className="pixel-grid rounded-lg border border-ink-soft bg-ink-deep p-4 sm:p-6">
       <header className="mb-5 flex flex-wrap items-end justify-between gap-5">
-        <h2 className="font-pixel text-xl tracking-wide [text-shadow:2px_2px_0_var(--color-tech)]">
+        <h2 className="font-pixel text-sm tracking-wide [text-shadow:2px_2px_0_var(--color-tech)]">
           SKILL TREE
         </h2>
         <ul className="flex gap-5 border border-ink-soft bg-ink/60 px-3.5 py-2.5">
@@ -62,10 +62,10 @@ export default function SkillTree() {
                 key={lane.id}
                 className="min-w-[240px] flex-1 shrink-0 snap-start"
               >
-                <h3 className="mb-4 flex items-center gap-2 font-pixel text-xs tracking-wide text-tech">
+                <h3 className="mb-4 flex items-center gap-2 font-pixel text-[9px] leading-relaxed tracking-wide text-tech">
                   <PixelSprite
-                    layers={LANE_GLYPHS[lane.id]}
-                    className="size-4 shrink-0"
+                    layers={LANE_ICONS[lane.id]}
+                    className="size-7 shrink-0"
                   />
                   {lane.name.toUpperCase()}
                 </h3>
@@ -100,7 +100,7 @@ export default function SkillTree() {
                           <span
                             aria-hidden="true"
                             className={cn(
-                              "flex size-10 shrink-0 items-center justify-center border-2 font-pixel text-[11px]",
+                              "flex size-10 shrink-0 items-center justify-center border-2 font-pixel text-[7px] leading-none",
                               marker[skill.tier],
                             )}
                           >
@@ -131,7 +131,7 @@ export default function SkillTree() {
             <div className="flex flex-col items-center gap-4 py-12 text-center">
               <span
                 aria-hidden="true"
-                className="flex size-10 items-center justify-center border-2 border-dashed border-ink-soft font-pixel text-sm text-on-dark-soft"
+                className="flex size-10 items-center justify-center border-2 border-dashed border-ink-soft font-pixel text-[10px] text-on-dark-soft"
               >
                 ?
               </span>
@@ -144,7 +144,7 @@ export default function SkillTree() {
       </div>
 
       <p className="mt-4 font-mono text-[9.5px] tracking-[0.1em] text-on-dark-soft uppercase">
-        Header sprites adapted from{" "}
+        Pixel icons by{" "}
         <a
           href="https://pxlkit.xyz"
           target="_blank"
@@ -183,7 +183,7 @@ function Detail({ skill, lane }: NonNullable<ReturnType<typeof findSkill>>) {
       <p className="mb-2.5 font-mono text-[10.5px] tracking-[0.12em] text-tech uppercase">
         {lane.name}
       </p>
-      <h3 className="mb-3.5 font-pixel text-[17px]/[1.35]">{skill.label}</h3>
+      <h3 className="mb-3.5 font-pixel text-[11px]/[1.5]">{skill.label}</h3>
 
       <p className="mb-3.5 flex items-center gap-2.5">
         <span aria-hidden="true" className="inline-flex gap-1">
