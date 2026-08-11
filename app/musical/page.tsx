@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 
 interface Show {
     title: string;
@@ -88,25 +87,17 @@ const training = [
     }
 ];
 
+type Section = "about" | "shows" | "training";
+
 export default function Musical() {
-    const [activeSection, setActiveSection] = useState<"shows" | "training">("shows");
+    const [activeSection, setActiveSection] = useState<Section>("shows");
 
     return (
-        <main className="min-h-screen bg-[#CAC6CE] p-6">
-            {/* BACK BUTTON */}
-            <div className="mb-6">
-                <Link
-                    href="/"
-                    className="text-[#1b5e20] font-semibold hover:text-[#4caf50] transition"
-                >
-                    ← Back to Home
-                </Link>
-            </div>
-
+        <main className="min-h-screen bg-[#CAC4CE] p-6">
             {/* BIG ELEGANT HEADER */}
             <div className="text-center mb-12">
                 <h1
-                    className="text-7xl mb-4 text-[#1b5e20]"
+                    className="text-7xl mb-4 text-[#3E7A62]"
                     style={{
                         fontFamily: "Georgia, serif",
                         fontWeight: "300",
@@ -115,7 +106,7 @@ export default function Musical() {
                 >
                     MUSICAL
                 </h1>
-                <div className="h-1 w-96 mx-auto bg-gradient-to-r from-transparent via-[#4caf50] to-transparent" />
+                <div className="h-1 w-96 mx-auto bg-gradient-to-r from-transparent via-[#87BFA5] to-transparent" />
             </div>
 
             <div className="max-w-5xl mx-auto">
@@ -131,24 +122,24 @@ export default function Musical() {
 
                 {/* Section Toggle */}
                 <div className="flex justify-center gap-8 mb-10">
-                    {["shows", "training", "about"].map((section) => (
+                    {(["about", "shows", "training"] as Section[]).map((section) => (
                         <button
                             key={section}
-                            onClick={() => setActiveSection(section as "shows" | "training")}
+                            onClick={() => setActiveSection(section)}
                             className="relative pb-2 transition-all duration-300"
                             style={{
                                 fontFamily: "Georgia, serif",
                                 fontSize: "1.125rem",
                                 letterSpacing: "0.1em",
-                                color: activeSection === section ? "#1b5e20" : "#9ca3af",
+                                color: activeSection === section ? "#3E7A62" : "#9ca3af",
                             }}
                         >
                             {section.toUpperCase()}
                             {activeSection === section && (
                                 <div
-                                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#4caf50]"
+                                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#87BFA5]"
                                     style={{
-                                        boxShadow: "0 0 8px rgba(76, 175, 80, 0.5)"
+                                        boxShadow: "0 0 8px rgba(62, 122, 98, 0.5)"
                                     }}
                                 />
                             )}
@@ -156,11 +147,45 @@ export default function Musical() {
                     ))}
                 </div>
 
+                {/* About Section */}
+                {activeSection === "about" && (
+                    <div className="max-w-3xl mx-auto space-y-6">
+                        <p className="text-gray-800 leading-relaxed">
+                            Spencer Bowden is a Nashville-based music director, pianist, arranger, and
+                            vocal coach. Born in Cincinnati, he fell in love with music at the age of
+                            five when he started piano lessons, and never stopped his musical journey
+                            since. Spencer has a diverse musical background, being trained classically
+                            but also playing keys in his local high school rock band Stonefish,
+                            performing both covers and originals. At Vanderbilt University, he studied
+                            classical piano with Jama Reagan and collaborative piano with Jennifer
+                            McGuire, and music directed countless performances.
+                        </p>
+                        <p className="text-gray-800 leading-relaxed">
+                            He approaches all of his sessions, gigs, lessons, and projects with earnest
+                            enthusiasm, quick adaptivity, and creativity to ensure all collaborators can
+                            get the thoroughness and aptitude required to nail the performance. He has a
+                            passion for musical theatre and musical storytelling, both classics and new
+                            works. He is probably sight reading a vocal score as we speak.
+                        </p>
+                        <div className="pt-4">
+                            <h3 className="text-sm uppercase tracking-widest text-[#87BFA5] mb-3">
+                                Other notable engagements
+                            </h3>
+                            <ul className="space-y-2 text-gray-800 leading-relaxed">
+                                <li>CCM Accompanist</li>
+                                <li>Wyoming High School Percussion Instructor and Arranger</li>
+                                <li>Columbus Children&rsquo;s Theatre Music Instructor</li>
+                                <li>Accompanist for many productions at Vanderbilt University</li>
+                            </ul>
+                        </div>
+                    </div>
+                )}
+
                 {/* Shows Section */}
                 {activeSection === "shows" && (
                     <div className="space-y-6">
                         <h2
-                            className="text-2xl text-center mb-8 text-[#1b5e20]"
+                            className="text-2xl text-center mb-8 text-[#3E7A62]"
                             style={{
                                 fontFamily: "Georgia, serif",
                                 fontWeight: "300",
@@ -174,10 +199,10 @@ export default function Musical() {
                             {shows.map((show, index) => (
                                 <div
                                     key={index}
-                                    className="bg-white p-6 rounded-sm shadow-lg hover:shadow-xl transition-all duration-300 border-l-4 border-[#4caf50]"
+                                    className="bg-white p-6 rounded-sm shadow-lg hover:shadow-xl transition-all duration-300 border-l-4 border-[#87BFA5]"
                                 >
                                     <h3
-                                        className="text-xl mb-2 text-[#1b5e20]"
+                                        className="text-xl mb-2 text-[#3E7A62]"
                                         style={{
                                             fontFamily: "Georgia, serif",
                                             fontStyle: "italic",
@@ -186,7 +211,7 @@ export default function Musical() {
                                         {show.title}
                                     </h3>
                                     <p
-                                        className="text-sm text-[#4caf50] mb-2 font-semibold"
+                                        className="text-sm text-[#87BFA5] mb-2 font-semibold"
                                         style={{ fontFamily: "system-ui" }}
                                     >
                                         {show.role}
@@ -209,7 +234,7 @@ export default function Musical() {
                 {activeSection === "training" && (
                     <div className="space-y-8">
                         <h2
-                            className="text-2xl text-center mb-8 text-[#1b5e20]"
+                            className="text-2xl text-center mb-8 text-[#3E7A62]"
                             style={{
                                 fontFamily: "Georgia, serif",
                                 fontWeight: "300",
@@ -223,10 +248,10 @@ export default function Musical() {
                             {training.map((item, index) => (
                                 <div
                                     key={index}
-                                    className="bg-white p-6 rounded-sm shadow-lg border-t-2 border-[#4caf50]"
+                                    className="bg-white p-6 rounded-sm shadow-lg border-t-2 border-[#87BFA5]"
                                 >
                                     <h3
-                                        className="text-lg mb-3 text-[#1b5e20]"
+                                        className="text-lg mb-3 text-[#3E7A62]"
                                         style={{
                                             fontFamily: "Georgia, serif",
                                             fontWeight: "500",
@@ -248,9 +273,9 @@ export default function Musical() {
                         </div>
 
                         {/* Skills Summary */}
-                        <div className="bg-gradient-to-br from-[#f1f8e9] to-white p-8 rounded-sm shadow-lg">
+                        <div className="bg-gradient-to-br from-[#F4F1E8] to-white p-8 rounded-sm shadow-lg">
                             <h3
-                                className="text-xl text-center mb-6 text-[#1b5e20]"
+                                className="text-xl text-center mb-6 text-[#3E7A62]"
                                 style={{
                                     fontFamily: "Georgia, serif",
                                     letterSpacing: "0.1em",
@@ -261,11 +286,21 @@ export default function Musical() {
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
                                 {["Piano", "Music Direction", "QLab", "Conducting"].map((skill) => (
                                     <div key={skill} className="p-4">
-                                        <div
-                                            className="text-3xl mb-2"
-                                            style={{ color: "#4caf50" }}
-                                        >
-                                            ♪
+                                        <div className="mb-2 flex justify-center" aria-hidden="true">
+                                            <svg
+                                                width="20"
+                                                height="20"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="#87BFA5"
+                                                strokeWidth="1.5"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                            >
+                                                <circle cx="8" cy="18" r="3" />
+                                                <line x1="11" y1="18" x2="11" y2="5" />
+                                                <path d="M11 5c3 0 6 1 6 4" />
+                                            </svg>
                                         </div>
                                         <p
                                             className="text-sm text-gray-700"

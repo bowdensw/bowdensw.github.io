@@ -199,15 +199,19 @@ Clicking About sets an out-of-range value and renders nothing.
 there are no API routes and no server actions available — a form backend is mandatory,
 not optional.
 
-### Dead and empty files
+### Dead and empty files — RESOLVED 2026-08-10
+
+Deleted:
 
 - `app/technical/components/about.tsx` — 0 bytes
 - `app/technical/components/AttributePanel.tsx` — 0 bytes
 - `app/technical/components/attributes.tsx` — 292 lines, imported by nothing, emoji-laden
-- `app/technical/components/techIcons.tsx` — appears unused
 
-Delete all four. The About copy that should live in `about.tsx` is currently inlined in
-`page.tsx`.
+**Correction:** `techIcons.tsx` was listed here in error. It is imported by
+`Projects.tsx` (`getTechIcon`) and is live code. Kept.
+
+The About copy that should live in `about.tsx` is still inlined in `page.tsx` — move it
+during Phase 6.
 
 ### Emoji in the codebase
 

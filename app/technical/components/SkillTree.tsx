@@ -84,7 +84,7 @@ export default function SkillTree() {
               `,
                         }}
                     >
-                        SKILL TREE🛠️
+                        SKILL TREE
                     </h1>
                     <div
                         className="h-1 w-48 mt-2 rounded-full mx-auto"

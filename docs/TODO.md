@@ -19,41 +19,81 @@ Independent of the redesign. These are live bugs.
 - [ ] Verify locally: `npm run build` clean, no asset 404s when serving `out/`.
 - [ ] Confirm GitHub Settings → Pages points at the `gh-pages` branch (the `deploy`
       script pushes there, not to `main`).
-- [ ] Create the missing `public/icons/` assets, or remove the three dead `<img>` tags in
-      `app/page.tsx` (`/icons/code.png`, `/icons/music.png`, `/icons/book.png`).
-- [ ] Fix the Musical About tab — state is typed `"shows" | "training"` but three buttons
-      render. Clicking About does nothing.
-- [ ] Delete dead files: `technical/components/attributes.tsx`, `techIcons.tsx`, and the
-      two 0-byte files `about.tsx` and `AttributePanel.tsx`.
-- [ ] Remove every emoji from the codebase. Starts with `SKILL TREE🛠️`.
+- [x] Removed the three dead `<img>` tags in `app/page.tsx` (`/icons/*.png` never existed).
+- [x] Fixed the Musical About tab — state widened to `"about" | "shows" | "training"`, and
+      the About panel now renders the bio copy from the planning doc.
+- [x] Deleted dead files: `attributes.tsx`, `about.tsx`, `AttributePanel.tsx`.
+      **`techIcons.tsx` was kept** — it is imported by `Projects.tsx`, the spec was wrong.
+- [x] Removed all emoji (`SKILL TREE🛠️`, and the `♪` glyph on Musical replaced with an
+      inline SVG).
 - [ ] Verify with a production build (`npm run build`) that no asset 404s remain.
 
 ## Phase 1 — Foundation
 
-- [ ] Write the `@theme` block in `app/globals.css` with the full token set from spec §3.
-      No `tailwind.config.ts` — Tailwind v4 doesn't use one.
-- [ ] Unify the background color. `#CAC4CE` and `#CAC6CE` are both in use; keep `#CAC4CE`.
-- [ ] Replace the Musical Material greens (`#1b5e20`, `#4caf50`) with the mint family.
-- [ ] Load the five font families via `next/font/google` in `layout.tsx`.
-- [ ] Strip every inline `font-family: Georgia` and `font-family: monospace` from
-      components; use tokens.
-- [ ] Create `components/`, `lib/`, and `public/icons/`.
-- [ ] Add `lib/cn.ts`. (No `basePath.ts` needed — basePath is gone.)
-- [ ] Init shadcn/ui against Tailwind v4.
-- [ ] Install `@pxlkit/core` + `@pxlkit/ui-kit`, wire `PxlKitSurfaceProvider`, add the
-      `@source "../node_modules/@pxlkit/ui-kit"` line to `globals.css`. Licensing cleared;
-      add the attribution line to the footer.
-- [ ] Add a `prefers-reduced-motion` block covering the float, pulse, and orbit keyframes.
+- [x] Wrote the `@theme` block in `app/globals.css` with the full token set from spec §3,
+      plus spacing steps and two layered shadow tokens. No `tailwind.config.ts`.
+- [x] Unified the background on `#CAC4CE` (`#CAC6CE` eliminated).
+- [x] Replaced the Musical Material greens with the mint family (`#3E7A62`, `#87BFA5`).
+- [x] Fonts wired. Geist Sans, Geist Mono, and Fraunces load in the root layout;
+      **Silkscreen and Cormorant Garamond are scoped** to `app/technical/layout.tsx` and
+      `app/musical/layout.tsx` so they only download on those routes.
+- [x] Added `metadataBase`, a title template, and Open Graph tags to the root layout.
+- [x] Created `components/` and `lib/`, with `lib/cn.ts` and `lib/routes.ts`.
+- [x] Added a `prefers-reduced-motion` block that disables float, pulse, and orbit.
+- [ ] Strip the remaining inline `font-family: Georgia` / `monospace` from components and
+      use tokens. Deferred — those components are rebuilt in Phases 3–6 anyway.
+- [ ] Init shadcn/ui against Tailwind v4. **Requires npm — see handoff below.**
+- [ ] Install `@pxlkit/core` + `@pxlkit/ui-kit`, wire `PxlKitSurfaceProvider`, add
+      `@source "../node_modules/@pxlkit/ui-kit"` to `globals.css`, add the attribution
+      line to the footer. **Requires npm — see handoff below.**
+- [ ] After shadcn installs `clsx` and `tailwind-merge`, upgrade `lib/cn.ts` to the
+      `twMerge(clsx(...))` implementation (the target version is in the file's comment).
 
 ## Phase 2 — Navigation
 
-- [ ] Build `components/SiteNav.tsx`. One `accent` prop, nothing else varies. Dark
-      `#242038` background on every route, sticky, ~56px.
-- [ ] Mobile menu — wordmark plus menu button, slide-down panel. No emoji.
-- [ ] Mount in `app/layout.tsx`, pass `accent` per route.
-- [ ] Delete all five "← Back to Home" links.
-- [ ] Keyboard nav: tab order, visible `focus-visible` rings, escape closes the mobile
-      panel.
+- [x] Built `components/SiteNav.tsx`. Dark `#242038` bar, sticky, `h-14`, identical on
+      every route. Accent comes from `lib/routes.ts` rather than a prop — the active
+      route is derived from `usePathname()`, so nothing has to be passed per page.
+- [x] Active underline animates via `scale-x` (transform only, no `transition-all`).
+- [x] Mobile menu — wordmark plus hand-drawn SVG menu icon, slide-down panel.
+- [x] Mounted in `app/layout.tsx`, above `{children}`.
+- [x] Deleted all five "← Back to Home" links and the now-unused `Link` imports.
+- [x] Keyboard nav: `focus-visible` rings on every link, Escape closes the mobile panel
+      and returns focus to the toggle, outside-click closes, route change closes.
+      `aria-current="page"`, `aria-expanded`, `aria-controls` all set.
+- [ ] Visual check at 375px — not yet verified in a browser.
+
+## Handoff — commands Spencer needs to run
+
+These need npm registry access, which the Cowork sandbox doesn't have.
+
+```bash
+# 1. Confirm Phases 0-2 build and look right
+npm run dev            # check the nav on every route, then at 375px
+npm run build          # must exit clean
+npm run lint
+
+# 2. shadcn/ui (also installs clsx + tailwind-merge)
+npx shadcn@latest init
+
+# 3. PxlKit — licensing cleared, attribution required
+npm install @pxlkit/core @pxlkit/ui-kit
+```
+
+After PxlKit installs, add to `app/globals.css`:
+
+```css
+@import "@pxlkit/ui-kit/styles.css";
+@source "../node_modules/@pxlkit/ui-kit";
+```
+
+and wrap `/technical` in `<PxlKitSurfaceProvider surface="pixel">` inside
+`app/technical/layout.tsx`.
+
+**Note:** `npm run build` currently downloads a platform-specific SWC binary on first
+run. That's expected.
+
+---
 
 ## Phase 3 — Landing *(needs mockup)*
 

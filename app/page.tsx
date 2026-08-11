@@ -127,29 +127,12 @@ export default function Home() {
                     </div>
                 </section>
 
-                {/* RIGHT — PHOTO WITH FLOATING ICONS */}
+                {/* RIGHT — PHOTO */}
                 <section className="relative flex justify-center">
                     <img
                         src="/images/me.jpg"
-                        alt="Spencer photo"
+                        alt="Spencer Bowden"
                         className="w-64 h-64 object-cover rounded-full shadow-lg border-4 border-white"
-                    />
-
-                    {/* Float icons around the image */}
-                    <img
-                        src="/icons/code.png"
-                        className="absolute -top-6 -left-6 w-10 animate-floatSlow"
-                        alt=""
-                    />
-                    <img
-                        src="/icons/music.png"
-                        className="absolute bottom-0 -right-4 w-10 animate-pulseSlow"
-                        alt=""
-                    />
-                    <img
-                        src="/icons/book.png"
-                        className="absolute top-20 -right-12 w-10 animate-orbit"
-                        alt=""
                     />
                 </section>
 

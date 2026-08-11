@@ -1,20 +1,8 @@
 "use client";
 
-import Link from "next/link";
-
 export default function Resume() {
     return (
-        <main className="min-h-screen bg-[#CAC6CE] p-6">
-            {/* BACK BUTTON */}
-            <div className="mb-6">
-                <Link
-                    href="/"
-                    className="text-[#242038] font-semibold hover:text-[#FFBF00] transition"
-                >
-                    ← Back to Home
-                </Link>
-            </div>
-
+        <main className="min-h-screen bg-[#CAC4CE] p-6">
             {/* BIG HEADER */}
             <div className="text-center mb-12">
                 <h1

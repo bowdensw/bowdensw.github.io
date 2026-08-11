@@ -1,7 +1,6 @@
 "use client";
 
 import {useState} from "react";
-import Link from "next/link";
 import SkillTree from "@/app/technical/components/SkillTree";
 import Projects from "@/app/technical/components/Projects";
 
@@ -17,17 +16,7 @@ export default function Technical() {
     };
 
     return (
-        <main className="min-h-screen bg-[#CAC6CE] p-6">
-
-            {/* BACK BUTTON */}
-            <div className="mb-6">
-                <Link
-                    href="/"
-                    className="text-[#242038] font-semibold hover:text-[#9067C6] transition"
-                >
-                    ← Back to Home
-                </Link>
-            </div>
+        <main className="min-h-screen bg-[#CAC4CE] p-6">
 
             {/* BIG PIXEL HEADER */}
             <div className="text-center mb-8">

@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import type { FormEvent, ChangeEvent } from "react";
-import Link from "next/link";
 
 
 
@@ -26,15 +25,7 @@ export default function Contact() {
     };
 
     return (
-        <main className="min-h-screen bg-[#CAC6CE] px-6 py-12">
-            {/* BACK */}
-            <Link
-                href="/"
-                className="text-[#242038] font-medium hover:text-[#9E5677] transition"
-            >
-                ← Back to Home
-            </Link>
-
+        <main className="min-h-screen bg-[#CAC4CE] px-6 py-12">
             {/* HEADER */}
             <div className="text-center mt-12 mb-16">
                 <h1
