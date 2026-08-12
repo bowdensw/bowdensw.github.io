@@ -13,7 +13,7 @@ This is the source of truth. `docs/DESIGN-BRIEF.md` is what gets handed to Claud
 | Question | Decision |
 |---|---|
 | Nav model | One neutral bar on every page. Section color enters only through the active-link underline. |
-| Skill tree | Keep the node graph. Restructure into vertical specialty lanes, scrolled horizontally. |
+| Skill tree | Keep the node graph. Restructure into vertical specialty lanes, wrapped 3-up. |
 | v1 scope | Landing, Résumé, Contact, Musical. Technical ships with a restructured but static skill tree. Pixel animation and playable instruments are v2. |
 | Two portfolios | Yes — Technical and Musical stay visually distinct, but the distinction lives in the page content, not the chrome. |
 
@@ -24,7 +24,7 @@ This is the source of truth. `docs/DESIGN-BRIEF.md` is what gets handed to Claud
 ```
 /                 Landing — hero, short bio, four entry points
 /technical        About → Projects → Skills          (tabs, in that order)
-/musical          About → Shows → Mainstage Files    (tabs, in that order)
+/musical          About → Credits → Mainstage Files  (tabs, in that order)
 /resume           Viewer + download
 /contact          Info cards + form
 ```
@@ -108,10 +108,23 @@ Two base families plus two section display faces. Never the same face for headin
 body on any given page.
 
 ```css
---font-sans:    Geist Sans        /* body, everywhere. Already installed. */
+--font-sans:    Atkinson Hyperlegible Next
+                                  /* body, everywhere. Replaced Geist 2026-08-12 —
+                                     Geist was the create-next-app default, i.e. the one
+                                     face nobody chose. Braille Institute low-vision
+                                     family: I/l/1 and 0/O drawn apart, asymmetric bowls,
+                                     open apertures. Half the degree is Cognitive Studies
+                                     and these guardrails are already about legibility,
+                                     so the face states a position. ~4% wider than Geist. */
 --font-display: Fraunces          /* landing, résumé, contact headings */
---font-mono:    Geist Mono        /* technical body + UI */
---font-pixel:   Silkscreen        /* technical H1 and skill-tree labels only */
+--font-mono:    Atkinson Hyperlegible Mono
+                                  /* technical body + UI. Same family as the body face,
+                                     so the two read as one decision. */
+--font-pixel:   Press Start 2P    /* technical H1 and skill-tree labels only. PxlKit's
+                                     own pixel face (PXLKIT_FONTS) — changed from
+                                     Silkscreen 2026-08-12 so the type matches the icons.
+                                     Roughly 2x Silkscreen's advance width, so pixel type
+                                     is sized well below --text-display. */
 --font-score:   Cormorant Garamond /* musical headings */
 ```
 
@@ -134,7 +147,7 @@ Shadows are color-tinted and low-opacity, never flat `shadow-md`.
 | Need | Choice | Notes |
 |---|---|---|
 | Base components | **shadcn/ui** | Copy-paste, not a dependency. Works with Tailwind v4 + React 19. Used on landing, résumé, contact, musical. |
-| Technical aesthetic | **PxlKit** (`@pxlkit/core` + `@pxlkit/ui-kit`) | v2.1.1, TypeScript, built for Tailwind v4, documents its Next.js setup. 111 components, 226 icons. Also publishes Claude Code skills at pxlkit.xyz/skills. |
+| Technical aesthetic | **PxlKit** (`@pxlkit/core` + `@pxlkit/ui-kit` + `@pxlkit/parallax`) — INSTALLED | v2.1.1, TypeScript, built for Tailwind v4, documents its Next.js setup. 111 components, 226 icons. Also publishes Claude Code skills at pxlkit.xyz/skills. |
 | Icons | **Tabler outline** + PxlKit icons on Technical | No emoji anywhere. See §7. |
 | Audio (v2) | **Tone.js + smplr** | *Not* react-orchestra — see below. |
 | Contact form | **Web3Forms** | 250 submissions/month free. See §6. |
@@ -175,7 +188,7 @@ its own JS and CSS but does **not** prefix raw `<img src="/...">`. The built
 ```
 href="/spencerbowden.github.io/_next/static/chunks/....css"   ← prefixed
 src="/images/me.jpg"                                          ← not prefixed
-src="/resume.pdf"                                             ← not prefixed
+src="/SWB_RESUME_Tech.pdf"                                    ← not prefixed
 ```
 
 Broken in production: the portrait, all four hover icons, all 40+ skill-tree logos, the
@@ -234,11 +247,19 @@ Violates the project's own hard rule.
 - shadcn portfolio-style layout. Hero, short bio, four entry points.
 - Keep the hover-icon idea — it has personality and it's yours. Fix the assets, keep the
   float animation, add `prefers-reduced-motion` handling.
-- New favicon: yellow backpack, replacing the penguin. **Decided** — Kanken silhouette,
-  body in `#FFD76A`, straps and buckles in tan `#8C6E4F`. Reads as the Acorn colorway
-  while keeping the résumé yellow dominant, and stays legible at 16px. Export 16 / 32 /
-  180 / 512px plus `apple-touch-icon`. Build it as SVG first so it scales cleanly.
-- Bio copy needs a rewrite (flagged in your doc, no replacement text supplied yet).
+- New favicon: yellow backpack, replacing the penguin. **Shipped 2026-08-12.** Kanken
+  silhouette on a 16×16 pixel grid, body `#FFD76A` / `#F0C24F` over `#8A6A0B`
+  (`--color-resume` and `--color-resume-deep`), straps `#6E442B` / `#9C6644`, buckle
+  `#F4F1E8`. The straps came out a shade deeper than the `#8C6E4F` in the decision log —
+  Spencer's art wins.
+
+  The three files live in `app/`, not `public/`, using Next's metadata file convention:
+  `app/favicon.ico` (48px), `app/icon.svg`, `app/apple-icon.png` (180px). Next evaluates
+  them and emits the `<link>` tags itself with content hashes, which is why there are no
+  hand-written icon tags in the layout and no `public/` path to keep in sync. Browsers
+  that understand SVG take `icon.svg` and get a crisp icon at any size; the rest fall
+  back to the `.ico`.
+- Bio copy: supplied and in place.
 
 ### Technical
 
@@ -246,8 +267,12 @@ Tab order: **About → Projects → Skills.**
 
 Skill tree, restructured:
 
-- Vertical lanes by specialty — Web, Systems / Game Design, ML / Academic, UI/UX,
-  Foundations. Horizontal scroll or snap between lanes.
+- Six vertical lanes by specialty — Foundations, Front End, Back End,
+  Systems / Game Design, Academic / Research, UI / UX. They wrap 3-up rather than
+  scrolling horizontally: six lanes never fit on one row, and a column cut off mid-node
+  reads as broken rather than as "there is more".
+- Lanes and nodes mirror the Claude Design skill-tree mockup exactly, down to each
+  node's tier and the course or project credited beneath it.
 - Progress reads top-to-bottom *within* a lane. Foundations at the top, advanced work at
   the bottom. The current graph has everything cross-connected, which is why it reads as
   noise to anyone who hasn't played FFX.
@@ -265,13 +290,16 @@ Skill tree, restructured:
 
 ### Musical
 
-Tab order: **About → Shows → Mainstage Files.**
+Tab order: **About → Credits → Mainstage Files.**
 
 - About: the bio from your planning doc goes in verbatim, plus the "other notable gigs"
   line. Break into two or three paragraphs.
-- Shows: compact rows, not the current two-column card grid. Optional row/grid toggle.
-  Strip the padding down.
-- Mainstage Files: new tab. Your sales copy goes in verbatim, base price $300/show,
+- Credits (formerly "Shows"): compact rows, not the current two-column card grid.
+  Columns are Production / Year / Role / Company / Credit, ordered newest first and
+  hand-ordered within a year. A credit can wear more than one hat, so each department
+  the role touches adds its own glyph. Optional row/grid toggle is v2.
+- Mainstage Files: new tab, Production / Price / request, alphabetical by title (sorted
+  in the data so it stays that way). Your sales copy goes in verbatim, base price $300/show,
   contact `spencerbowden337@gmail.com`. **You have no files yet** — this needs a real
   empty state that reads as "coming soon," not as a broken page.
 - Instruments in the sidebar playing show snippets: **v2**, via Tone.js + smplr.
@@ -311,7 +339,7 @@ Tab order: **About → Shows → Mainstage Files.**
 
 | # | Question | Resolution |
 |---|---|---|
-| 1 | Favicon colorway | Hybrid approved — `#FFD76A` body, `#8C6E4F` straps. |
+| 1 | Favicon colorway | Hybrid approved — `#FFD76A` body, brown straps. Shipped. |
 | 2 | Repo rename | Done. `bowdensw/bowdensw.github.io`, basePath removed. |
 | 3 | Landing bio | Spencer will rewrite later. Current copy stands for now. |
 | 4 | Skill tree copy | Claude drafts from résumé and projects; Spencer edits. |

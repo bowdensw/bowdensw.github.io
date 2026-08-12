@@ -49,19 +49,12 @@ export default function SkillTree() {
       </header>
 
       <div className="flex items-start gap-6">
-        {/* Five lanes never fit at once by design — they snap horizontally.
-            The thin scrollbar and the fade at the trailing edge are what say so. */}
-        <div className="relative min-w-0 flex-1">
-          <span
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-y-0 right-0 z-1 w-12 bg-linear-to-l from-ink-deep to-transparent"
-          />
-          <div className="flex snap-x snap-mandatory gap-7 overflow-x-auto pb-4 [scrollbar-color:var(--color-ink-soft)_transparent] [scrollbar-width:thin]">
+        {/* Lanes wrap rather than scroll: six of them never fit on one row, and a
+            column cut off mid-node reads as broken rather than as "there is more". */}
+        <div className="min-w-0 flex-1">
+          <div className="grid gap-x-7 gap-y-10 sm:grid-cols-2 xl:grid-cols-3">
             {lanes.map((lane) => (
-              <div
-                key={lane.id}
-                className="min-w-[240px] flex-1 shrink-0 snap-start"
-              >
+              <div key={lane.id} className="min-w-0">
                 <h3 className="mb-4 flex items-center gap-2 font-pixel text-[9px] leading-relaxed tracking-wide text-tech">
                   <PixelSprite
                     layers={LANE_ICONS[lane.id]}
@@ -100,7 +93,7 @@ export default function SkillTree() {
                           <span
                             aria-hidden="true"
                             className={cn(
-                              "flex size-10 shrink-0 items-center justify-center border-2 font-pixel text-[7px] leading-none",
+                              "flex size-10 shrink-0 items-center justify-center border-2 font-pixel text-[10px] leading-none",
                               marker[skill.tier],
                             )}
                           >

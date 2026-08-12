@@ -4,12 +4,12 @@ import { useState } from "react";
 import PageShell from "@/components/PageShell";
 import { TabList, TabPanel, type Tab } from "@/components/Tabs";
 import About from "./components/About";
+import Credits from "./components/Credits";
 import Mainstage from "./components/Mainstage";
-import Shows from "./components/Shows";
 
 const tabs: Tab[] = [
   { id: "about", label: "About" },
-  { id: "shows", label: "Shows" },
+  { id: "credits", label: "Credits" },
   { id: "mainstage", label: "Mainstage Files" },
 ];
 
@@ -17,7 +17,7 @@ export default function MusicalPage() {
   const [tab, setTab] = useState(tabs[0].id);
 
   return (
-    <PageShell width="medium">
+    <PageShell width="wide">
       <header className="mb-7 text-center">
         <h1 className="inline-block border-b-2 border-music pb-1 font-score text-display font-semibold text-music-deep italic">
           Musical
@@ -39,8 +39,8 @@ export default function MusicalPage() {
         <TabPanel id="about" value={tab}>
           <About />
         </TabPanel>
-        <TabPanel id="shows" value={tab}>
-          <Shows />
+        <TabPanel id="credits" value={tab}>
+          <Credits />
         </TabPanel>
         <TabPanel id="mainstage" value={tab}>
           <Mainstage />

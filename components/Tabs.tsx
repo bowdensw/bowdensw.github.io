@@ -14,7 +14,7 @@ const skins = {
   /* Technical: pixel chips on a dark ground. */
   pixel: {
     list: "flex flex-wrap justify-center gap-3",
-    tab: "rounded-sm border-2 px-5 py-3 font-pixel text-[11px] tracking-wide transition-[color,background-color,border-color,box-shadow] duration-200 focus-visible:ring-2 focus-visible:ring-tech-soft focus-visible:ring-offset-2 focus-visible:ring-offset-ink",
+    tab: "rounded-sm border-2 px-5 py-3 font-pixel text-[11px] tracking-wide uppercase transition-[color,background-color,border-color,box-shadow] duration-200 focus-visible:ring-2 focus-visible:ring-tech-soft focus-visible:ring-offset-2 focus-visible:ring-offset-ink",
     active: "border-tech bg-tech text-white shadow-[0_0_12px] shadow-tech/40",
     inactive:
       "border-ink-soft text-on-dark-soft hover:border-tech-soft hover:text-on-dark active:text-white",

@@ -1,5 +1,6 @@
 import {
   CyberEye,
+  GhostFriend,
   MagicOrb,
   PixelCrown,
   PixelHeart,
@@ -33,7 +34,12 @@ function toLayers(icon: ParallaxPxlKitData): PixelLayer[] {
           palette: layer.palette,
           frames: layer.frames.map((frame) => frame.grid),
         }
-      : { depth, frameDuration: 0, palette: layer.palette, frames: [layer.grid] }
+      : {
+          depth,
+          frameDuration: 0,
+          palette: layer.palette,
+          frames: [layer.grid],
+        },
   );
 }
 
@@ -45,8 +51,9 @@ export const HEADER_SPRITES = {
 /** One animated PxlKit icon per skill lane, keyed by lane id. */
 export const LANE_ICONS: Record<string, PixelLayer[]> = {
   foundations: toLayers(PixelCrown),
-  web: toLayers(PixelRocket),
+  frontend: toLayers(PixelRocket),
+  backend: toLayers(GhostFriend),
   systems: toLayers(RetroJoystick),
-  ml: toLayers(CyberEye),
+  academic: toLayers(CyberEye),
   design: toLayers(PixelHeart),
 };

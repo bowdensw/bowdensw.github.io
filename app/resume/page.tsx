@@ -44,7 +44,7 @@ export default function ResumePage() {
         </ul>
 
         <a
-          href="/resume.pdf"
+          href="/SWB_RESUME_Tech.pdf"
           download
           className={buttonVariants({ tone: "resume" })}
         >

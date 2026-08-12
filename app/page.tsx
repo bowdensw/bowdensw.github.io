@@ -5,7 +5,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { entryPoints } from "./entry-points";
 
 const bio =
-  "I'm a software engineer and music director, and I've stopped treating those as two separate résumés. I'm finishing a double degree in Cognitive Studies and Computer Science at Vanderbilt, with a minor in Music. Most of what I do is translation: turning a messy system into something a user trusts in one glance, or turning a score into something a cast trusts on stage. Same instinct, different material.";
+  "I prioritize community and helping people, whether that’s diving into a messy system and turning it into a clean one end users can trust, or turning a sprawling score into one cast members can trust onstage in front of an audience. What’s most important to me is making people happy, and often that’s through bringing clean, manageable solutions to big problems, all with a smile on my face. I have a double degree in Computer Science and Cognitive Studies with a minor in Music from Vanderbilt! Click on these tabs below to learn a little bit more about what I do.";
 
 export default function LandingPage() {
   return (
@@ -77,7 +77,7 @@ export default function LandingPage() {
                       alt=""
                       width={140}
                       height={140}
-                      className="w-full group-hover:animate-floatSlow group-hover:drop-shadow-[0_0_12px_var(--glow)] group-focus-within:drop-shadow-[0_0_12px_var(--glow)]"
+                      className="w-full group-hover:animate-floatSlow group-hover:[filter:drop-shadow(0_0_8px_var(--glow))_drop-shadow(0_0_20px_var(--glow))] group-focus-within:[filter:drop-shadow(0_0_8px_var(--glow))_drop-shadow(0_0_20px_var(--glow))]"
                     />
                   </span>
                 </span>

@@ -1,15 +1,18 @@
 import { buttonVariants } from "@/components/ui/button";
 import { PRICE, mailto, sessions } from "../data/mainstage";
 
-/* Rows rather than the mockup's card grid, to match the Shows table — the two
-   tabs list the same kind of thing and should scan the same way. */
-const columns = "sm:grid-cols-[2fr_1.7fr_auto_auto]";
+/* Rows rather than the mockup's card grid, to match the Credits table — the two
+   tabs list the same kind of thing and should scan the same way. Fixed tracks
+   so the header aligns with the rows; see the note in Credits.tsx. */
+const columns = "sm:grid-cols-[1fr_72px_190px]";
 const heading =
   "text-[11.5px] font-bold tracking-[0.06em] text-music-deep uppercase";
 
 export default function Mainstage() {
   return (
-    <div>
+    /* Capped narrower than the page: Credits is what sets the shell's width, and
+       a three-column price list stretched to match reads as mostly gap. */
+    <div className="mx-auto max-w-[820px]">
       <header className="mb-8 text-center">
         <h2 className="mb-3 font-score text-[28px] font-semibold text-music-deep italic">
           MainStage session files
@@ -26,7 +29,6 @@ export default function Mainstage() {
         aria-hidden="true"
       >
         <span className={heading}>Production</span>
-        <span className={heading}>Includes</span>
         <span className={heading}>Price</span>
         <span />
       </div>
@@ -45,17 +47,6 @@ export default function Mainstage() {
                 {session.meta}
               </p>
             </div>
-
-            <ul className="flex flex-wrap gap-1.5">
-              {session.tags.map((tag) => (
-                <li
-                  key={tag}
-                  className="rounded-full border border-music/55 px-2.5 py-0.5 text-[11.5px] text-music-deep"
-                >
-                  {tag}
-                </li>
-              ))}
-            </ul>
 
             <p className="font-semibold whitespace-nowrap text-music-deep">
               {PRICE}

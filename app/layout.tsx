@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import {
+  Atkinson_Hyperlegible_Mono,
+  Atkinson_Hyperlegible_Next,
   Cormorant_Garamond,
   Fraunces,
-  Geist,
-  Geist_Mono,
   Press_Start_2P,
 } from "next/font/google";
 import SiteNav from "@/components/SiteNav";
@@ -17,15 +17,21 @@ import "./globals.css";
  *
  * Press Start 2P and Cormorant belong to one section each, so they skip preload —
  * their files are fetched only on the routes that actually render them.
+ *
+ * The body and mono faces are Atkinson Hyperlegible, the Braille Institute's
+ * low-vision family: I/l/1 and 0/O are drawn apart, bowls are asymmetric, and
+ * apertures stay open. Half of Spencer's degree is Cognitive Studies and this
+ * site's guardrails are already about legibility, so the face states a position
+ * the way the previous `create-next-app` default never did.
  */
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const bodySans = Atkinson_Hyperlegible_Next({
+  variable: "--font-body",
   subsets: ["latin"],
   display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const bodyMono = Atkinson_Hyperlegible_Mono({
+  variable: "--font-body-mono",
   subsets: ["latin"],
   display: "swap",
 });
@@ -53,8 +59,8 @@ const cormorant = Cormorant_Garamond({
 });
 
 const fontVariables = [
-  geistSans.variable,
-  geistMono.variable,
+  bodySans.variable,
+  bodyMono.variable,
   fraunces.variable,
   pressStart.variable,
   cormorant.variable,

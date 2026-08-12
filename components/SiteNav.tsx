@@ -56,7 +56,7 @@ export default function SiteNav() {
     "focus-visible:ring-offset-ink";
 
   return (
-    <header className="sticky top-0 z-50 bg-ink">
+    <header className="sticky top-0 z-50 border-b border-white/12 bg-ink">
       <nav
         aria-label="Main"
         className="flex h-14 items-center justify-between px-4 sm:px-6 md:px-8"
