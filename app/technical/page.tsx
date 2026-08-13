@@ -23,7 +23,7 @@ export default function TechnicalPage() {
   return (
     <PageShell width="xwide">
       <header className="mb-10 flex flex-col items-center gap-6 md:flex-row md:justify-between">
-        <Frame {...HEADER_SPRITES.orb} className="hidden md:block" />
+        <Frame {...HEADER_SPRITES.computer} className="hidden md:block" />
 
         <div className="flex flex-col items-center text-center">
           {/* Press Start 2P runs about twice the advance width of Silkscreen,
@@ -47,7 +47,7 @@ export default function TechnicalPage() {
           </ul>
         </div>
 
-        <Frame {...HEADER_SPRITES.tv} className="order-first md:order-0" />
+        <Frame {...HEADER_SPRITES.gamepad} className="order-first md:order-0" />
       </header>
 
       <TabList

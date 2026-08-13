@@ -55,10 +55,13 @@ export default function SkillTree() {
           <div className="grid gap-x-7 gap-y-10 sm:grid-cols-2 xl:grid-cols-3">
             {lanes.map((lane) => (
               <div key={lane.id} className="min-w-0">
-                <h3 className="mb-4 flex items-center gap-2 font-pixel text-[9px] leading-relaxed tracking-wide text-tech">
+                {/* size-9 rather than size-7: the Back End icon packs a
+                    terminal, a database and a gear into 16×16, and below about
+                    36px its three parts stop resolving as three things. */}
+                <h3 className="mb-4 flex items-center gap-2.5 font-pixel text-[9px] leading-relaxed tracking-wide text-tech">
                   <PixelSprite
                     layers={LANE_ICONS[lane.id]}
-                    className="size-7 shrink-0"
+                    className="size-9 shrink-0"
                   />
                   {lane.name.toUpperCase()}
                 </h3>

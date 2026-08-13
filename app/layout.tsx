@@ -23,17 +23,30 @@ import "./globals.css";
  * apertures stay open. Half of Spencer's degree is Cognitive Studies and this
  * site's guardrails are already about legibility, so the face states a position
  * the way the previous `create-next-app` default never did.
+ *
+ * Both carry `adjustFontFallback: false` and a fallback stack of their own.
+ * Next builds its metric-matched fallback @font-face from a precalculated table
+ * (server/capsize-font-metrics.json), and these two families are newer than it —
+ * it holds `atkinsonHyperlegible` but neither `Next` nor `Mono`. The lookup
+ * throws, Next logs "Failed to find font override values" on every compile, and
+ * returns undefined. Opting out changes nothing about the emitted CSS; it only
+ * stops asking for a fallback that cannot be built. Drop these two lines once
+ * the families reach the table.
  */
 const bodySans = Atkinson_Hyperlegible_Next({
   variable: "--font-body",
   subsets: ["latin"],
   display: "swap",
+  adjustFontFallback: false,
+  fallback: ["system-ui", "sans-serif"],
 });
 
 const bodyMono = Atkinson_Hyperlegible_Mono({
   variable: "--font-body-mono",
   subsets: ["latin"],
   display: "swap",
+  adjustFontFallback: false,
+  fallback: ["ui-monospace", "monospace"],
 });
 
 const fraunces = Fraunces({
