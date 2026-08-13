@@ -10,7 +10,7 @@ export default function Projects() {
           key={project.name}
           className="relative flex flex-col overflow-hidden rounded-lg border-2 border-ink-soft bg-ink"
         >
-          <p className="absolute top-2.5 right-2.5 z-2 rounded-sm border border-white/25 bg-tech px-2.5 py-1 font-mono text-[10.5px] font-bold tracking-wide text-white shadow-card">
+          <p className="absolute top-2.5 right-2.5 z-2 rounded-sm border border-ink/25 bg-tech-bright px-2.5 py-1 font-mono text-[10.5px] font-bold tracking-wide text-ink shadow-card">
             {project.category}
           </p>
 
@@ -30,7 +30,7 @@ export default function Projects() {
               {project.techStack.map((tech) => (
                 <li
                   key={tech}
-                  className="rounded-sm border border-tech/40 px-2 py-0.5 font-mono text-[11px] text-tech"
+                  className="rounded-sm border border-tech-bright/45 px-2 py-0.5 font-mono text-[11px] text-tech-bright"
                 >
                   {tech}
                 </li>

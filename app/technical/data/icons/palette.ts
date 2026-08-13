@@ -41,8 +41,6 @@ export const TECH_PALETTE = {
   N: "#34386e",
   /** --color-ink-deep. Outlines and the screen bezel. */
   K: "#1a1730",
-  /** --color-ink. Panel dark, one step up from the outline. */
-  D: "#242038",
   /** --color-paper. The one neutral: cabling and hardware trim. */
   L: "#cac4ce",
   /** `B` rotated to cyan. React's orbit and its electron: 9.7:1 on the ground. */

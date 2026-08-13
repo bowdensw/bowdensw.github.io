@@ -9,7 +9,7 @@ import { TIERS, type Tier, findSkill, lanes } from "../data/skills";
 
 /** Tier is the whole progression model — it replaced the old `unlocked` flag. */
 const marker: Record<Tier, string> = {
-  3: "border-solid border-tech bg-tech text-white",
+  3: "border-solid border-tech-bright bg-tech-bright text-ink",
   2: "border-solid border-tech bg-tech/25 text-paper",
   1: "border-dashed border-tech/60 text-paper",
 };
@@ -58,7 +58,7 @@ export default function SkillTree() {
                 {/* size-9 rather than size-7: the Back End icon packs a
                     terminal, a database and a gear into 16×16, and below about
                     36px its three parts stop resolving as three things. */}
-                <h3 className="mb-4 flex items-center gap-2.5 font-pixel text-[9px] leading-relaxed tracking-wide text-tech">
+                <h3 className="mb-4 flex items-center gap-2.5 font-pixel text-[9px] leading-relaxed tracking-wide text-tech-bright">
                   <PixelSprite
                     layers={LANE_ICONS[lane.id]}
                     className="size-9 shrink-0"
@@ -106,7 +106,7 @@ export default function SkillTree() {
                             <span className="font-mono text-[12.5px]/[1.3] font-medium text-paper">
                               {skill.label}
                             </span>
-                            <span className="font-mono text-[9.5px] tracking-[0.06em] text-tech uppercase">
+                            <span className="font-mono text-[9.5px] tracking-[0.06em] text-tech-bright uppercase">
                               {skill.source}
                             </span>
                           </span>
@@ -145,7 +145,7 @@ export default function SkillTree() {
           href="https://pxlkit.xyz"
           target="_blank"
           rel="noopener noreferrer"
-          className="rounded-sm underline outline-none hover:text-tech focus-visible:ring-2 focus-visible:ring-tech"
+          className="rounded-sm underline outline-none hover:text-tech-bright focus-visible:ring-2 focus-visible:ring-tech"
         >
           PxlKit
         </a>
@@ -176,7 +176,7 @@ export default function SkillTree() {
 function Detail({ skill, lane }: NonNullable<ReturnType<typeof findSkill>>) {
   return (
     <>
-      <p className="mb-2.5 font-mono text-[10.5px] tracking-[0.12em] text-tech uppercase">
+      <p className="mb-2.5 font-mono text-[10.5px] tracking-[0.12em] text-tech-bright uppercase">
         {lane.name}
       </p>
       <h3 className="mb-3.5 font-pixel text-[11px]/[1.5]">{skill.label}</h3>
@@ -202,7 +202,7 @@ function Detail({ skill, lane }: NonNullable<ReturnType<typeof findSkill>>) {
       </p>
 
       <p className="mb-4 text-sm/[1.65] text-on-dark">{skill.blurb}</p>
-      <p className="inline-block border border-tech/55 px-2.5 py-1 font-mono text-[11px] text-tech">
+      <p className="inline-block border border-tech/55 px-2.5 py-1 font-mono text-[11px] text-tech-bright">
         {skill.source}
       </p>
     </>

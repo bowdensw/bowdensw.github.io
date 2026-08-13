@@ -6,8 +6,7 @@ import { cn } from "@/lib/utils";
  */
 const widths = {
   narrow: "max-w-[760px]", // résumé
-  medium: "max-w-[900px]", // musical
-  wide: "max-w-[1080px]", // landing
+  wide: "max-w-[1080px]", // landing, musical
   full: "max-w-[1160px]", // contact
   xwide: "max-w-[1280px]", // technical — the skill tree needs the lane room
 } as const;

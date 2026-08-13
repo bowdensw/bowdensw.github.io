@@ -217,9 +217,16 @@ client.
 ### Tokens are the entire palette
 
 The `@theme` block in `app/globals.css` is the whole color system. Default Tailwind palette
-values (`indigo-500`, `blue-600`) never appear. Four section accents each have a `-deep`
+values (`indigo-500`, `blue-600`) never appear. Three section accents each have a `-deep`
 variant, because the base colors fail WCAG AA as text on light backgrounds. Use the base for
 fills and borders, and `-deep` whenever the color carries type.
+
+**Technical inverts this and it is easy to get wrong.** It is the one dark page, so `--tech`
+needed a *lighter* partner rather than a deeper one: `--color-tech-bright`. On that page
+`--tech` is for borders, spines and decoration only — it fails AA as text on both dark
+grounds (3.69:1 and 4.09:1), and white on a `--tech` fill fails too (4.25:1), so there is no
+foreground that works over it. Anything carrying text uses `text-tech-bright`, and a
+`bg-tech-bright` fill takes `text-ink` on top.
 
 ### Motion is transform and opacity only
 

@@ -40,9 +40,19 @@
 
   /* Section accents. The -deep variants exist because the base colors fail
      WCAG AA as text on light backgrounds — use base for fills and borders,
-     -deep whenever the color carries type. */
+     -deep whenever the color carries type.
+
+     Technical is the one dark room in the house, so --tech needs the opposite
+     partner: -deep would sink into the ground. --tech itself measures 3.69:1 on
+     --ink and 4.09:1 on --ink-deep, so it fails AA as small type on its own
+     page, and white on a --tech fill is 4.25:1, which fails too. The rule on
+     Technical is therefore: --tech for borders, spines and decoration; never
+     for type and never behind type. Anything carrying text uses -bright, and a
+     -bright fill takes --ink on top, which is the same ink-on-accent rule
+     components/ui/button.tsx already follows. */
   --color-tech: #9067c6;
   --color-tech-soft: #8d86c9;
+  --color-tech-bright: #ac8dd4; /* 5.61:1 on --ink, 6.21:1 on --ink-deep */
   --color-music: #87bfa5;
   --color-music-deep: #3e7a62;
   --color-resume: #ffd76a;

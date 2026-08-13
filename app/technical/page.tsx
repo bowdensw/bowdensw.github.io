@@ -39,7 +39,7 @@ export default function TechnicalPage() {
             {tags.map((tag) => (
               <li
                 key={tag}
-                className="rounded-sm border border-tech px-2.5 py-1 font-mono text-[11.5px] font-bold tracking-wide text-tech"
+                className="rounded-sm border border-tech-bright px-2.5 py-1 font-mono text-[11.5px] font-bold tracking-wide text-tech-bright"
               >
                 {tag}
               </li>

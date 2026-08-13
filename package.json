@@ -13,11 +13,9 @@
     "postbuild": "echo > out/.nojekyll"
   },
   "dependencies": {
-    "@base-ui/react": "^1.7.0",
     "@pxlkit/core": "^1.3.4",
     "@pxlkit/effects": "^1.2.3",
     "@pxlkit/parallax": "^1.2.3",
-    "@pxlkit/ui-kit": "^2.1.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^1.31.0",
@@ -26,15 +24,13 @@
     "react-dom": "^19.2.3",
     "shadcn": "^4.16.2",
     "tailwind-merge": "^3.6.0",
-    "tw-animate-css": "^1.4.0",
-    "yargs": "^18.0.0"
+    "tw-animate-css": "^1.4.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/node": "^26.2.0",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "baseline-browser-mapping": "^2.9.2",
     "eslint": "^9",
     "eslint-config-next": "16.0.3",
     "gh-pages": "^6.3.0",

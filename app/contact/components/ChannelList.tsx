@@ -18,6 +18,9 @@ const focusRing =
 
 export default function ChannelList() {
   const { copiedKey, copy } = useCopy();
+  const copiedLabel = channels.find(
+    (channel) => channel.key === copiedKey,
+  )?.label;
 
   return (
     // min-w-0 because this is a grid item, and grid items size to their
@@ -58,14 +61,14 @@ export default function ChannelList() {
                     minimum size is its content, so it would refuse to shrink. */}
                 <span className="min-w-0 truncate">{channel.value}</span>
                 {channel.external && (
-                  <ExternalLink
-                    aria-hidden="true"
-                    className="size-4 shrink-0"
-                  />
+                  <>
+                    <ExternalLink
+                      aria-hidden="true"
+                      className="size-4 shrink-0"
+                    />
+                    <span className="sr-only">(opens in a new tab)</span>
+                  </>
                 )}
-                <span className="sr-only">
-                  {channel.external ? "(opens in a new tab)" : ""}
-                </span>
               </a>
             </div>
 
@@ -85,13 +88,20 @@ export default function ChannelList() {
               ) : (
                 <Copy aria-hidden="true" className="size-4" />
               )}
-              <span className="sr-only">
-                {copied ? `${channel.label} copied` : `Copy ${channel.label}`}
-              </span>
+              {/* The button keeps one name for its whole life. Renaming a
+                  control the user has just activated is announced unreliably —
+                  the confirmation belongs in the live region below instead. */}
+              <span className="sr-only">Copy {channel.label}</span>
             </button>
           </li>
         );
       })}
+
+      {/* Rendered always, filled on copy: a live region added to the DOM at the
+          same moment its text appears is frequently missed. */}
+      <li aria-live="polite" className="sr-only">
+        {copiedLabel && `${copiedLabel} copied to clipboard`}
+      </li>
     </ul>
   );
 }
