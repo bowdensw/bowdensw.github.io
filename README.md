@@ -1,7 +1,7 @@
 # bowdensw.github.io
 
-Spencer Bowden's personal site. Software engineering on one side, music direction on the
-other, and a landing page that lets you pick.
+my personal site! Software portfolio on one side, music portfolio on the
+other. Resume and Contact as well.
 
 Live at **https://bowdensw.github.io**
 
@@ -43,12 +43,8 @@ Content lives in `data/*.ts` files, not in JSX. Adding a credit means editing
 
 ## Docs
 
-- **[HANDBOOK.md](HANDBOOK.md)** is the one to start with. The stack in full, the
-  file tree, the patterns, and how to edit each page.
-- **[docs/REVAMP-SPEC.md](docs/REVAMP-SPEC.md)** covers design tokens, information
-  architecture, and library decisions.
-- **[docs/TODO.md](docs/TODO.md)** is the phased work log.
-- **[CLAUDE.md](CLAUDE.md)** holds the constraints for AI coding agents working in this repo.
+- **[HANDBOOK.md](HANDBOOK.md)** is documentation on how to edit/update this page,
+- as well as going into more specifics about stack, directory, and logic.
 
 Before changing anything about paths, `output: "export"`, or the Tailwind setup, read the
 **Traps** section of the handbook. Each entry there has already cost a debugging session.
