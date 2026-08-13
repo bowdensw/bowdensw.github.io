@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "check:icons": "node --experimental-strip-types scripts/check-icons.mts",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d out",
+    "deploy": "gh-pages -d out --dotfiles",
     "postbuild": "echo > out/.nojekyll"
   },
   "dependencies": {
