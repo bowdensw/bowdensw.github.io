@@ -8,7 +8,7 @@ Live at **https://bowdensw.github.io**
 ## Stack
 
 Next.js 16 (App Router) with React 19 and Tailwind v4, statically exported to GitHub Pages.
-No database, no backend, no API routes. The whole site compiles to HTML in `out/`.
+The whole site compiles to HTML in `out/`.
 
 Pixel art comes from [PxlKit](https://pxlkit.xyz). Body type is Atkinson Hyperlegible, the
 Braille Institute's low-vision family.
