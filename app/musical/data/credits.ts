@@ -39,6 +39,13 @@ export const credits: Credit[] = [
     lead: "MD: Trey Lundquist",
   },
   {
+    title: "Ride the Cyclone",
+    year: 2026,
+    role: "Synthesizer",
+    organization: "Vanderbilt Off-Broadway",
+    lead: "MD: Lalima Sharan",
+  },
+  {
     title: "Natasha, Pierre, and the Great Comet of 1812",
     year: 2025,
     role: "Music Director, Rehearsal Accompanist, Piano/Conductor/QLab DJ",
@@ -50,7 +57,7 @@ export const credits: Credit[] = [
     year: 2025,
     role: "Rehearsal Accompanist, Piano",
     organization: "Vanderbilt Off-Broadway",
-    lead: "Director: Kate Mason",
+    lead: "MD: Matthew Marcus",
   },
   {
     title: "Chicago",

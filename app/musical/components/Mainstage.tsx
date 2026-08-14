@@ -18,9 +18,22 @@ export default function Mainstage() {
           MainStage session files
         </h2>
         <p className="mx-auto max-w-130 text-[15px]/[1.7] text-ink-soft">
-          Complete MainStage sessions from productions I music directed —
-          patches, click tracks, and cue mapping already built and show-tested.{" "}
-          {PRICE} per show, delivered as a zipped session with a setup call.
+          From previous shows I’ve done. Programming Mainstage from scratch
+          during a tech week is rough, so these session files are for sale to
+          save you the trouble.
+        </p>
+        <p className="mx-auto mt-3 max-w-130 text-[15px]/[1.7] text-ink-soft">
+          Each one is built with care in the context of my own productions,
+          so some things may need shifting to fit yours, but it beats
+          programming a whole show from zero. Base price is $300 per show
+          &mdash;{" "}
+          <a
+            href={mailto("MainStage session inquiry")}
+            className="rounded-sm border-b border-music font-semibold text-music-deep outline-none hover:border-music-deep focus-visible:ring-2 focus-visible:ring-music-deep focus-visible:ring-offset-2 focus-visible:ring-offset-paper-warm"
+          >
+            email me
+          </a>{" "}
+          for requests or questions!
         </p>
       </header>
 
