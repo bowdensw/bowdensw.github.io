@@ -1,7 +1,6 @@
 # bowdensw.github.io
 
-my personal site! Software portfolio on one side, music portfolio on the
-other. Resume and Contact as well.
+my personal site! Software and Musical Portfolio in one! Resume and Contact as well.
 
 Live at **https://bowdensw.github.io**
 
@@ -47,4 +46,4 @@ Content lives in `data/*.ts` files, not in JSX. Adding a credit means editing
 - as well as going into more specifics about stack, directory, and logic.
 
 Before changing anything about paths, `output: "export"`, or the Tailwind setup, read the
-**Traps** section of the handbook. Each entry there has already cost a debugging session.
+**Traps** section of the handbook.
