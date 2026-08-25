@@ -19,6 +19,16 @@ const skins = {
     inactive:
       "border-ink-soft text-on-dark-soft hover:border-tech-soft hover:text-on-dark active:text-white",
   },
+  /* Résumé: a neutral segmented switch. The two résumés are peers rather than
+     sections of one document, so this skin carries no accent at all — the
+     active state is a raised surface, and section colour arrives below it in
+     whichever résumé is showing. */
+  segmented: {
+    list: "mx-auto flex w-fit gap-1 rounded-xl border border-paper bg-surface/50 p-1",
+    tab: "rounded-lg px-5 py-2 text-[13px] font-semibold transition-[color,background-color,box-shadow] duration-200 focus-visible:ring-2 focus-visible:ring-ink-soft focus-visible:ring-offset-2 focus-visible:ring-offset-paper",
+    active: "bg-surface text-ink shadow-card",
+    inactive: "text-ink-soft hover:text-ink active:text-ink-soft",
+  },
   /* Musical: serif labels over a hairline rule. */
   underline: {
     list: "flex flex-wrap justify-center gap-6 border-b border-ink-soft/15 sm:gap-8",

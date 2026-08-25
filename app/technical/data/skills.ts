@@ -11,7 +11,6 @@
  *
  * `blurb` is deliberately how-and-why, never what. "React" does not say "a
  * JavaScript library" — it says where it was used and what it made possible.
- * These are drafts from the résumé and project list; Spencer edits.
  */
 
 export const TIERS = { 1: "Learning", 2: "Working", 3: "Fluent" } as const;
@@ -49,7 +48,7 @@ export const lanes: Lane[] = [
         source: "3+ projects",
         year: 2022,
         blurb:
-          "Running Faunology's integration branch for a four-person team taught me that a clean history is a communication tool, not bookkeeping.",
+          "Obviously useful and industry standard. Mastering GitHub throughout the years meant mastering an individual and collaborative workflow through issue tracking, PRs.",
       },
       {
         id: "java",
@@ -59,7 +58,7 @@ export const lanes: Lane[] = [
         source: "CS 1101 / 2201",
         year: 2022,
         blurb:
-          "The language I learned to think in, and then the one I taught. Two years of TAing meant reading hundreds of other people's Java and finding the exact line where their mental model broke.",
+          "The language I learned to think in, and then the one I taught. Two years of TAing meant reviewing hundreds of other people's Java and finding the exact line where their mental model broke.  While I don’t particularly use it now for projects, it is an excellent foundation for OOP, tracing errors, and coding.",
       },
       {
         id: "oop",
@@ -69,7 +68,7 @@ export const lanes: Lane[] = [
         source: "CS 2201",
         year: 2022,
         blurb:
-          "Where I stopped writing programs and started writing systems. It is the reason I reach for a boundary before I reach for a feature.",
+          "Encapsulation, Abstraction, Inheritance, and Polymorphism are crucial concepts I use daily to creating reusable, readable, clean, and maintainable code everyday, even outside of in-class PAs.",
       },
       {
         id: "dsa",
@@ -79,7 +78,7 @@ export const lanes: Lane[] = [
         source: "CS 2201 / 3250",
         year: 2023,
         blurb:
-          "Less about interview puzzles than about knowing the cost of a choice before making it. It is why the solitaire move validator runs in constant time instead of rescanning the board.",
+          "Taught me trade-offs, thinking outside the box, and creative engineering. I try to do exercises with DSA (LeetCode, pseudocode problems) consistently to keep up my cognitive chops.",
       },
       {
         id: "discrete",
@@ -89,7 +88,7 @@ export const lanes: Lane[] = [
         source: "CS 2212",
         year: 2023,
         blurb:
-          "Gave me the vocabulary for proving a thing is correct rather than testing until it seems correct. Shows up most when I am reasoning about state machines and game rules.",
+          "Essential for bridging the gap between my math framework and CS theory. Particularly helpful when working out game logic and understanding trade-offs for state machine architecture within game projects.",
       },
       {
         id: "patterns",
@@ -99,7 +98,7 @@ export const lanes: Lane[] = [
         source: "CS 3251",
         year: 2024,
         blurb:
-          "The course that changed how I read other people's code. I use patterns as names for problems I have already seen, not as a checklist to satisfy.",
+          "Ultimately the most paramount fundamental in the age of AI and changed the way I thought about code forever. Understanding patterns of problems and architectures is the most important for engineering nowadays when code can be generated at the hit of a button. Imperative to the most important job of a software engineer nowadays → making a codebase healthy, and moreso, keeping it healthy.",
       },
       {
         id: "arch",
@@ -109,7 +108,7 @@ export const lanes: Lane[] = [
         source: "CS 2281",
         year: 2023,
         blurb:
-          "Caches, pipelines, and the cost of a branch. This is the course that makes data-oriented design feel obvious rather than clever.",
+          "Caches, pipelines, and the cost of a branch. Fundamental for understanding how to write performant code, and how to reason about the performance of code. It is also essential for understanding how to write code that is efficient in terms of memory and CPU usage.",
       },
     ],
   },

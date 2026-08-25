@@ -15,8 +15,9 @@ import "./globals.css";
  * :root. A var() that resolves to nothing there invalidates the whole
  * declaration and silently drops the page to a serif fallback.
  *
- * Press Start 2P and Cormorant belong to one section each, so they skip preload —
- * their files are fetched only on the routes that actually render them.
+ * Press Start 2P belongs to /technical and Cormorant to /musical and the musical
+ * résumé, so both skip preload — their files are fetched only on the routes that
+ * actually render them.
  *
  * The body and mono faces are Atkinson Hyperlegible, the Braille Institute's
  * low-vision family: I/l/1 and 0/O are drawn apart, bowls are asymmetric, and
