@@ -5,7 +5,7 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ---------------------------------------------------------------------------
-   Design tokens. This @theme block is the entire palette — see docs/REVAMP-SPEC.md §3.
+   Design tokens. This @theme block is the entire palette. See docs/REVAMP-SPEC.md §3.
    Tailwind v4 has no tailwind.config.ts. Do not create one.
    Tokens here generate utilities automatically: --color-ink → bg-ink, text-ink, etc.
 --------------------------------------------------------------------------- */
@@ -13,7 +13,7 @@
 /* ---------------------------------------------------------------------------
    shadcn/ui was init'd against this file and appended its own neutral oklch()
    palette below (--primary, --accent, --border, --sidebar-*, .dark, etc).
-   That palette is NOT the site's palette — it's shadcn's generic default and
+   That palette is NOT the site's palette. It's shadcn's generic default and
    exists only so components resolve at all. It must never be the source of a
    visible color anywhere on the site. The tokens below (--color-ink,
    --color-tech, --color-music, --color-resume, --color-contact, ...) are the
@@ -21,8 +21,8 @@
 
    When using a shadcn component, override its default classes with these
    tokens (e.g. a shadcn Button gets bg-tech, not the default bg-primary).
-   Do not `git rm` the shadcn block — components import against those variable
-   names and will break — just don't style anything with them directly.
+   Do not `git rm` the shadcn block. Components import against those variable
+   names and will break. Just don't style anything with them directly.
 --------------------------------------------------------------------------- */
 
 @theme {
@@ -39,7 +39,7 @@
   --color-on-dark-soft: #8a82a6;
 
   /* Section accents. The -deep variants exist because the base colors fail
-     WCAG AA as text on light backgrounds — use base for fills and borders,
+     WCAG AA as text on light backgrounds. Use base for fills and borders,
      -deep whenever the color carries type.
 
      Technical is the one dark room in the house, so --tech needs the opposite
@@ -76,7 +76,7 @@
   --text-display--line-height: 1.08;
   --text-display--letter-spacing: -0.03em;
 
-  /* Spacing — 4px scale. Stick to these steps. */
+  /* Spacing, on a 4px scale. Stick to these steps. */
   --spacing-1: 4px;
   --spacing-2: 8px;
   --spacing-3: 12px;
@@ -123,7 +123,8 @@ body {
 .animate-orbit { animation: orbit 6s linear infinite; }
 
 /* This site leans on float and pulse effects, so this block is load-bearing.
-   Motion is removed rather than reduced — these are decorative, not informational. */
+   Motion is removed rather than reduced, because these are decorative and not
+   informational. */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -146,7 +147,7 @@ body {
   image-rendering: pixelated;
 }
 
-/* Faint 24px graticule for the Technical surface — the flat replacement for the
+/* Faint 24px graticule for the Technical surface, the flat replacement for the
    eight stacked radial gradients that used to sit behind the skill tree. */
 @utility pixel-grid {
   background-image:
@@ -156,7 +157,7 @@ body {
 
 @theme inline {
   /* shadcn's scaffold declared `--font-sans: var(--font-sans)` here, which is
-     circular — it made the variable invalid and silently dropped the whole site
+     circular. It made the variable invalid and silently dropped the whole site
      to a serif fallback. The real --font-sans is in the @theme block above. */
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);

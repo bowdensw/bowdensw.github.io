@@ -23,8 +23,8 @@ import {
 
 const tone = "resume" as const;
 
-/* The PDF used to be the page, in an <iframe> that iOS Safari refuses to
-   render. It is now the download and this markup is the résumé. */
+/* Markup rather than the PDF, which used to sit here in an <iframe> that iOS
+   Safari refuses to render. The PDF is now only the download. */
 export default function TechnicalResume() {
   return (
     <>

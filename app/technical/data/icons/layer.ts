@@ -4,7 +4,7 @@ import type { ParallaxLayer } from "@pxlkit/core";
  * Builders for the layers of a hand-authored parallax icon.
  *
  * Every layer repeats the same four scaffolding fields, and an animated one has
- * to carry both `trigger` and the deprecated `loop` — PxlKit's docs say `trigger`
+ * to carry both `trigger` and the deprecated `loop`. PxlKit's docs say `trigger`
  * supersedes it, but `AnimatedPxlKitData` still types `loop` as required, so
  * omitting it fails the build. Declaring that once here keeps the icon files as
  * grids rather than as boilerplate.

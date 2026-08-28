@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 
 /**
- * Section tabs — the second navigation tier that sits below <SiteNav>.
+ * Section tabs, the second navigation tier that sits below <SiteNav>.
  * Behaviour (roving focus, arrow keys, ARIA wiring) is shared; only the skin
  * is per-section. See docs/REVAMP-SPEC.md §2.
  *
@@ -20,7 +20,7 @@ const skins = {
       "border-ink-soft text-on-dark-soft hover:border-tech-soft hover:text-on-dark active:text-white",
   },
   /* Résumé: a neutral segmented switch. The two résumés are peers rather than
-     sections of one document, so this skin carries no accent at all — the
+     sections of one document, so this skin carries no accent at all. The
      active state is a raised surface, and section colour arrives below it in
      whichever résumé is showing. */
   segmented: {

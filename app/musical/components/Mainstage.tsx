@@ -1,7 +1,7 @@
 import { buttonVariants } from "@/components/ui/button";
 import { PRICE, mailto, sessions } from "../data/mainstage";
 
-/* Rows rather than the mockup's card grid, to match the Credits table — the two
+/* Rows rather than the mockup's card grid, to match the Credits table. The two
    tabs list the same kind of thing and should scan the same way. Fixed tracks
    so the header aligns with the rows; see the note in Credits.tsx. */
 const columns = "sm:grid-cols-[1fr_72px_190px]";

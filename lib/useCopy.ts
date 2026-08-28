@@ -7,7 +7,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
  *
  * There is no execCommand fallback. `navigator.clipboard` is defined in every
  * secure context, the site is HTTPS on GitHub Pages, and localhost counts as
- * secure — so the 26 lines that used to sit here only ever ran on plain-HTTP
+ * secure, so the 26 lines that used to sit here only ever ran on plain-HTTP
  * LAN testing, which is not a thing this site does.
  */
 export function useCopy(resetAfter = 1800) {

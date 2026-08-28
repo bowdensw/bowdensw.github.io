@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
  *
  * Each layer is a stack of frames drawn on its own timer, and `depth` offsets
  * the layer against the pointer to fake parallax. The mockup built this out of
- * one <div> per cell — five layers of 16×16 is 1,280 nodes re-rendering ten
+ * one <div> per cell, and five layers of 16×16 is 1,280 nodes re-rendering ten
  * times a second, which is not something to ship. A canvas draws the same
  * thing in a few hundred fillRects and never touches the DOM.
  *

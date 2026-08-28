@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 import { LANE_ICONS } from "../data/pixel";
 import { TIERS, type Tier, findSkill, lanes } from "../data/skills";
 
-/** Tier is the whole progression model — it replaced the old `unlocked` flag. */
+/** Tier is the whole progression model; it replaced the old `unlocked` flag in v1. */
 const marker: Record<Tier, string> = {
   3: "border-solid border-tech-bright bg-tech-bright text-ink",
   2: "border-solid border-tech bg-tech/25 text-paper",

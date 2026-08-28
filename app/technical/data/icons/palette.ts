@@ -53,9 +53,10 @@ export const TECH_PALETTE = {
  * The four section accents, straight from `@theme`, plus a shade each.
  *
  * Used by one icon: the Foundations puzzle. Four pieces in the four colours the
- * rest of the site navigates by is the whole point of that lane — the parts fit
- * together — so it borrows the site palette rather than the ramp above. Every
- * one of them clears 4:1 against `--color-ink-deep`, gold by a mile at 12.6:1.
+ * rest of the site navigates by is the whole point of that lane, because the
+ * parts fit together. It borrows the site palette rather than the ramp above.
+ * Every one of them clears 4:1 against `--color-ink-deep`, gold by a mile at
+ * 12.6:1.
  *
  * Shades are each accent 38% toward `--color-ink`, which is enough to read as a
  * lit edge at 6×6 without turning the piece muddy.

@@ -1,6 +1,6 @@
 /**
  * The four landing entry points. `scale` is the hover icon's width as a
- * percentage of its button — the source art is square, so it is purely how
+ * percentage of its button. The source art is square, so it is purely how
  * large each object wants to read next to the others.
  */
 export type EntryPoint = {

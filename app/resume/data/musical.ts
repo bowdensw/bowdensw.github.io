@@ -1,27 +1,23 @@
 /**
- * The musical résumé. Credits lead, the way a performing-arts résumé is read.
+ * Musical résumé! Fits performing arts resume conventions.
  *
- * This file and public/SWB_RESUME_Musical.pdf are the same document — the PDF is
- * what gets emailed to a school, this is what the site renders. Change one and
- * change the other, or they drift.
+ * This file and public/SWB_RESUME_Musical.pdf are the same document. The PDF is
+ * what gets emailed to a school, this is what the site renders.
  *
  * Credits are the /musical page's `credits.ts` re-cut by department and with the
- * role strings shortened to one line each; the credits page keeps the full
+ * role strings shortened to one line each. The credits page keeps the full
  * multi-hat wording because it is the complete list, not a selection.
  */
 
 export const profile = {
   name: "Spencer Bowden",
-  title: "Music Director · Pianist · Conductor",
+  pronouns: "he/him/his",
   email: "spencerbowden337@gmail.com",
   phone: "(513) 503-9631",
   phoneHref: "tel:+15135039631",
   site: "bowdensw.github.io/musical",
   siteHref: "/musical",
 };
-
-export const summary =
-  "Nashville-based music director, pianist, arranger, and vocal coach. Classically trained and equally at home on a rock keys rig, with a focus on musical theatre — classics and new works alike.";
 
 export type CreditGroup = {
   label: string;
@@ -136,7 +132,7 @@ export const creditGroups: CreditGroup[] = [
   },
 ];
 
-/** Listings, not bullets — everything here is checkable against a person. */
+/** Listings, not bullets: everything here is checkable against a person. */
 export const engagements = [
   {
     role: "Session Accompanist, Musical Theatre Intensive",

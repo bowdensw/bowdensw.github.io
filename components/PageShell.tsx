@@ -1,14 +1,14 @@
 import { cn } from "@/lib/utils";
 
 /**
- * Centred page column. The single place page rhythm — max width, gutters,
- * vertical padding — is defined, so the five routes stay in step.
+ * Centred page column. The single place page rhythm (max width, gutters,
+ * vertical padding) is defined, so the five routes stay in step.
  */
 const widths = {
   narrow: "max-w-[760px]", // résumé
   wide: "max-w-[1080px]", // landing, musical
   full: "max-w-[1160px]", // contact
-  xwide: "max-w-[1280px]", // technical — the skill tree needs the lane room
+  xwide: "max-w-[1280px]", // technical: the skill tree needs the lane room
 } as const;
 
 type Props = {

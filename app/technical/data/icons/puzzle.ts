@@ -5,8 +5,8 @@ import { SECTION_PALETTE } from "./palette";
  * Four puzzle pieces locking together and coming apart again, for the
  * Foundations lane.
  *
- * The pieces are the four section accents — Musical, Contact, Technical,
- * Résumé — because the lane is about the parts a whole is assembled from, and
+ * The pieces are the four section accents (Musical, Contact, Technical,
+ * Résumé), because the lane is about the parts a whole is assembled from, and
  * those are the four parts of this site. It is the one icon that borrows the
  * site palette rather than the Technical shading ramp.
  *
@@ -27,7 +27,7 @@ type Piece = {
   dx: number;
   /** The edge its tab sticks out of, toward the neighbour it locks into. */
   tab: "right" | "down" | "up" | "left";
-  /** Palette keys, not colours — the grid holds one character per pixel. */
+  /** Palette keys, not colours. The grid holds one character per pixel. */
   fill: keyof typeof SECTION_PALETTE;
   shade: keyof typeof SECTION_PALETTE;
 };
@@ -92,7 +92,7 @@ function frame(gap: number): string[] {
   return cells.map((row) => row.join(""));
 }
 
-/** Closed, ajar, apart, ajar — so the loop reads as assembling and undoing. */
+/** Closed, ajar, apart, ajar, so the loop reads as assembling and undoing. */
 export const Puzzle: AnimatedPxlKitData = {
   name: "puzzle-assemble",
   size: 16,

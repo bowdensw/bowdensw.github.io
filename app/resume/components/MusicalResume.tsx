@@ -6,7 +6,6 @@ import {
   leadership,
   profile,
   specialSkills,
-  summary,
   training,
 } from "../data/musical";
 import {
@@ -25,12 +24,11 @@ const tone = "music" as const;
 
 /* Fixed tracks rather than `auto`: the group heading and its rows are separate
    grid containers, so an `auto` column resolves to a different width in each
-   and the columns drift apart — the same trap as musical/components/Credits. */
+   and the columns drift apart, the same trap as musical/components/Credits. */
 const columns = "sm:grid-cols-[1.5fr_64px_1.75fr_2fr]";
 
-/* Training, then credits, engagements, and leadership — the order of
-   public/SWB_RESUME_Musical.pdf. The two are the same document; reorder one and
-   reorder the other. */
+/* Training, credits, engagements, and leadership, following the order of
+   public/SWB_RESUME_Musical.pdf. */
 export default function MusicalResume() {
   return (
     <>
@@ -39,9 +37,7 @@ export default function MusicalResume() {
           <h1 className={`${toneOf(tone).display} text-display font-semibold`}>
             {profile.name}
           </h1>
-          <p className="mt-1.5 text-[13px] tracking-[0.12em] text-ink-soft uppercase">
-            {profile.title}
-          </p>
+          <p className="mt-1 text-[13px] text-ink-soft">{profile.pronouns}</p>
         </div>
 
         <ContactRow>
@@ -59,10 +55,6 @@ export default function MusicalResume() {
             {profile.site}
           </ContactLink>
         </ContactRow>
-
-        <p className="max-w-[620px] text-[14.5px]/[1.7] text-ink-soft">
-          {summary}
-        </p>
 
         <a
           href="/SWB_RESUME_Musical.pdf"

@@ -2,7 +2,7 @@ import type { AnimatedPxlKitData } from "@pxlkit/core";
 import { TECH_PALETTE } from "./palette";
 
 /**
- * Terminal, database, gear — the Back End lane, in light blue against the dark
+ * Terminal, database, gear: the Back End lane, in light blue against the dark
  * ground.
  *
  * The three parts are drawn separately and composited, because each one animates

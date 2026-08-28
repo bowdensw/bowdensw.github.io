@@ -4,8 +4,8 @@
  *
  * PxlKit ships a pre-flight checker (`check-icon.mjs` in its Claude Code plugin)
  * that parses icon files as *text*, because it assumes a consumer project has no
- * TypeScript build step to hand. That parser only recognizes literal palettes —
- * `palette: { "P": "#9067c6" }` — so it reads our shared `TECH_PALETTE`
+ * TypeScript build step to hand. That parser only recognizes literal palettes
+ * (`palette: { "P": "#9067c6" }`), so it reads our shared `TECH_PALETTE`
  * shorthand as an empty palette and reports every character as missing. Its own
  * spec calls `validateIconData()` the normative, stricter validator, so that is
  * what runs here: it checks resolved values rather than source text, which also
@@ -46,7 +46,7 @@ const icons: Array<ParallaxPxlKitData | AnyIcon> = await Promise.all(
 );
 
 /**
- * `validateIconData` only knows static icons — it reads `icon.grid` and throws on
+ * `validateIconData` only knows static icons. It reads `icon.grid` and throws on
  * an animated one. Frames are validated independently, each as the static icon it
  * would be, with any per-frame palette merged over the base the way the renderer
  * merges it.

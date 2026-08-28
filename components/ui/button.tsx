@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
  * The site's button. shadcn's scaffold shipped this wired to its own neutral
  * `--primary` palette and a `transition-all`; both are project hard rules, so
  * the variants below are rebuilt on the real tokens instead. Section colour
- * arrives through `tone` — see docs/REVAMP-SPEC.md §3.
+ * arrives through `tone`. See docs/REVAMP-SPEC.md §3.
  *
  * `buttonVariants` is exported so a next/link can wear the same clothes:
  *   <Link href="/resume" className={buttonVariants({ tone: "resume" })}>
@@ -18,7 +18,7 @@ const buttonVariants = cva(
     "disabled:pointer-events-none disabled:opacity-60 [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
-      /* Ink on accent, everywhere — every accent clears AA against --ink, and
+      /* Ink on accent, everywhere. Every accent clears AA against --ink, and
          white does not clear it against --music or --resume. */
       tone: {
         tech: "focus-visible:ring-tech",

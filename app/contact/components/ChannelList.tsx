@@ -24,7 +24,7 @@ export default function ChannelList() {
 
   return (
     // min-w-0 because this is a grid item, and grid items size to their
-    // content by default — without it the long LinkedIn URL widens the page.
+    // content by default. Without it the long LinkedIn URL widens the page.
     <ul className="flex min-w-0 flex-col rounded-xl border border-paper bg-surface shadow-card">
       {channels.map((channel, index) => {
         const Icon = icons[channel.icon];
@@ -89,8 +89,8 @@ export default function ChannelList() {
                 <Copy aria-hidden="true" className="size-4" />
               )}
               {/* The button keeps one name for its whole life. Renaming a
-                  control the user has just activated is announced unreliably —
-                  the confirmation belongs in the live region below instead. */}
+                  control the user has just activated is announced unreliably,
+                  so the confirmation belongs in the live region below instead. */}
               <span className="sr-only">Copy {channel.label}</span>
             </button>
           </li>

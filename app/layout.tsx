@@ -16,7 +16,7 @@ import "./globals.css";
  * declaration and silently drops the page to a serif fallback.
  *
  * Press Start 2P belongs to /technical and Cormorant to /musical and the musical
- * résumé, so both skip preload — their files are fetched only on the routes that
+ * résumé, so both skip preload. Their files are fetched only on the routes that
  * actually render them.
  *
  * The body and mono faces are Atkinson Hyperlegible, the Braille Institute's
@@ -27,8 +27,8 @@ import "./globals.css";
  *
  * Both carry `adjustFontFallback: false` and a fallback stack of their own.
  * Next builds its metric-matched fallback @font-face from a precalculated table
- * (server/capsize-font-metrics.json), and these two families are newer than it —
- * it holds `atkinsonHyperlegible` but neither `Next` nor `Mono`. The lookup
+ * (server/capsize-font-metrics.json), and these two families are newer than it.
+ * It holds `atkinsonHyperlegible` but neither `Next` nor `Mono`. The lookup
  * throws, Next logs "Failed to find font override values" on every compile, and
  * returns undefined. Opting out changes nothing about the emitted CSS; it only
  * stops asking for a fallback that cannot be built. Drop these two lines once

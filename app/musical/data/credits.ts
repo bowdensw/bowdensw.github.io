@@ -1,14 +1,14 @@
 export type Credit = {
   title: string;
-  /** The season the production closed — always a single year. */
+  /** The season the production closed, always a single year. */
   year: number;
   role: string;
   organization: string;
-  /** Who led it: the director, music director, advisor, or coordinator. */
+  /** Who led it: the director, music director, advisor, coordinator, etc. */
   lead: string;
 };
 
-/** Newest first, and hand-ordered within a year — see docs/REVAMP-SPEC.md §7. */
+/** Newest first, and hand-ordered within a year. See docs/REVAMP-SPEC.md §7. */
 export const credits: Credit[] = [
   {
     title: "Falsettos",

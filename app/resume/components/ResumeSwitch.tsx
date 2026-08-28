@@ -7,11 +7,12 @@ import TechnicalResume from "./TechnicalResume";
 
 /**
  * /resume holds two documents. The switch sits above both of them rather than
- * inside either, because it is choosing which résumé you are reading — the <h1>
- * below it belongs to the document, not to the page.
+ * inside either, because it is choosing which résumé you are reading. Each
+ * résumé brings its own <h1> and contact row, so the name below the switch
+ * belongs to the document rather than to the page.
  *
- * State only, deliberately: no route, no query param. The two résumés are one
- * page in the nav and a deep link to a tab would need a second entry there.
+ * State only, with no route and no query param. The two résumés are one page
+ * in the nav, and a deep link to a tab would need a second entry there.
  */
 const tabs: Tab[] = [
   { id: "technical", label: "Technical" },

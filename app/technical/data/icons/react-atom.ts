@@ -7,7 +7,7 @@ import { TECH_PALETTE } from "./palette";
  *
  * The orbit is walked, not drawn. Sampling the ellipse produces the ring *in
  * order*, so the electron's position on frame n is just an index into that
- * ring — it cannot drift off the track, and widening the ellipse moves the
+ * ring. It cannot drift off the track, and widening the ellipse moves the
  * particle with it. Hand-placing a dot on twelve frames is the version of this
  * that goes subtly wrong and stays wrong.
  */
@@ -39,7 +39,7 @@ function frame(step: number): string[] {
     Array<string>(SIZE).fill("."),
   );
 
-  // Palette keys, not colours — the grid holds one character per pixel.
+  // Palette keys, not colours. The grid holds one character per pixel.
   for (const [row, column] of orbit) cells[row][column] = "J";
 
   // Tail first, then the electron, so the head always wins its own pixel.

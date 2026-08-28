@@ -7,7 +7,7 @@ import { routes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
 
 /**
- * The site's only navigation. Identical on every route — same background, same
+ * The site's only navigation. Identical on every route: same background, same
  * type, same link order. Section color enters solely through the active-link
  * underline. See docs/REVAMP-SPEC.md §2 before changing anything here.
  */
@@ -49,7 +49,7 @@ export default function SiteNav() {
     };
   }, [open]);
 
-  // No padding here on purpose — callers set their own.
+  // No padding here on purpose; callers set their own.
   const linkBase =
     "relative text-sm outline-none transition-colors duration-200 rounded-sm " +
     "focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 " +

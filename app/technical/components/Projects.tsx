@@ -14,7 +14,7 @@ export default function Projects() {
             {project.category}
           </p>
 
-          {/* No screenshots yet — the gradient is the placeholder, on purpose. */}
+          {/* No screenshots yet; the gradient is the placeholder, on purpose. */}
           <div
             aria-hidden="true"
             className="h-40 bg-linear-135 from-ink to-tech/25"

@@ -5,12 +5,12 @@ import { Check, LoaderCircle, TriangleAlert } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-/* A Web3Forms access key is public by design — it ends up in the client bundle
+/* A Web3Forms access key is public by design. It ends up in the client bundle
    either way, and all it can do is deliver a message to Spencer's inbox. It is
    committed rather than left to a gitignored .env.local so a deploy from a fresh
    clone doesn't silently ship a dead form. The env var still wins if set.
    Absent means no backend yet, so the form says so rather than dropping
-   messages — see docs/TODO.md Phase 4. */
+   messages. See docs/TODO.md Phase 4. */
 const ACCESS_KEY =
   process.env.NEXT_PUBLIC_WEB3FORMS_KEY ??
   "a5e534dd-43bd-4249-98d2-83c322126568";

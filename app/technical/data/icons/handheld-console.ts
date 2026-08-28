@@ -15,7 +15,7 @@ import { TECH_PALETTE } from "./palette";
  * Same light as the computer, from the top left: H across the top ridge and the
  * left flank, M and I down the right side, N in the crotch between the grips
  * where nothing reaches. The D-pad is cut *into* the shell, so it runs the cool
- * arm of the ramp — N and J — while the face buttons sit proud and catch W.
+ * arm of the ramp (N and J) while the face buttons sit proud and catch W.
  */
 const { W, H, P, M, I, B, C, J, N, K, L } = TECH_PALETTE;
 

@@ -19,8 +19,7 @@ one.
 
 ## 1. Tech stack
 
-Everything is front-end. There is no database, no server, no API. The whole site compiles to
-static HTML in `out/` and GitHub Pages serves those files.
+Everything is front-end. There is no database, no server, no API (no need, it's a portfolio to display) The whole site compiles to static HTML in `out/` and GitHub Pages serves those files.
 
 ### Framework
 
@@ -55,8 +54,7 @@ A token added to `@theme` generates its utilities automatically: `--color-tech` 
 | `@pxlkit/effects` | Animated VFX pixel icons. `SparkBurst` heads the Academic lane |
 | `@pxlkit/ui-kit` | Installed but not rendered. Its own look does not match this site |
 
-No emoji anywhere: not in the UI, not in data files, not in headings. Icons come from lucide,
-PxlKit, or hand-written SVG.
+Icons come from lucide, PxlKit, or hand-written SVG.
 
 ### Fonts
 
@@ -67,9 +65,9 @@ build time. There are no `<link>` tags to Google and no `@import` in CSS.
 | --- | --- | --- |
 | Atkinson Hyperlegible Next | `--font-sans` | Body copy, site-wide |
 | Atkinson Hyperlegible Mono | `--font-mono` | Data and labels, site-wide |
-| Fraunces | `--font-display` | Headings on Home, Résumé, Contact |
+| Fraunces | `--font-display` | Headings on Home, Contact, and the technical résumé |
 | Press Start 2P | `--font-pixel` | Technical only. `preload: false` |
-| Cormorant Garamond | `--font-score` | Musical only. `preload: false` |
+| Cormorant Garamond | `--font-score` | Musical section and the musical résumé. `preload: false` |
 
 ### Build and deploy
 
@@ -127,8 +125,15 @@ app/
       mainstage.ts        MainStage session catalog, price, contact email
 
   resume/
-    page.tsx              the résumé, rendered as HTML
-    data/resume.ts        profile, education, skills, projects, experience, leadership
+    page.tsx              PageShell + metadata; the content is all in the switch
+    components/
+      ResumeSwitch.tsx    the technical/musical tab state
+      TechnicalResume.tsx ┐ one document each, same layout primitives
+      MusicalResume.tsx   ┘
+      paper.tsx           Card, Entry, Bullets, ContactRow — shared, tone-varied
+    data/
+      resume.ts           technical: profile, education, skillGroups, projects, experience, leadership
+      musical.ts          musical: profile, training, creditGroups, engagements, leadership, specialSkills
 
   contact/
     page.tsx
@@ -150,8 +155,11 @@ lib/
 
 public/
   images/                 profile photo, landing hover icons
-  logos/                  course and technology logos (legacy, mostly unreferenced)
-  SWB_RESUME_Tech.pdf     the résumé download
+  SWB_RESUME_Tech.pdf     ┐ the two résumé downloads
+  SWB_RESUME_Musical.pdf  ┘
+
+scripts/
+  check-icons.mts         what `npm run check:icons` runs
 
 docs/
   REVAMP-SPEC.md          design and architecture source of truth
@@ -203,16 +211,17 @@ keep the routes in step. No page sets its own `max-w` on `<main>`.
 
 `Tabs.tsx` owns roving focus, arrow and Home/End keys, and the full ARIA wiring
 (`role="tablist"`, `aria-selected`, `aria-controls`). Sections pass a `skin` and get a look:
-`pixel` for Technical, `underline` for Musical. Adding a third look means adding a key to the
-`skins` object, not writing a new tab component.
+`pixel` for Technical, `underline` for Musical, `segmented` for the résumé switch. Adding a
+fourth look means adding a key to the `skins` object, not writing a new tab component.
 
 ### The client boundary sits on the page, not the layout
 
 `app/technical/page.tsx` and `app/musical/page.tsx` are `"use client"` because they hold tab
 state. Their layouts stay server components, which is what lets them export `metadata`. Every
 component below a client page inherits the boundary, so `Tabs.tsx` needs no directive of its
-own. Résumé and Contact pages are server components; only `ContactForm` and `ChannelList` are
-client.
+own. Résumé and Contact stay server components at the page level and push the boundary one
+level down instead, into `ResumeSwitch`, `ContactForm`, and `ChannelList`. That is what lets
+`app/resume/page.tsx` export `metadata` without a layout of its own.
 
 ### Tokens are the entire palette
 
@@ -396,16 +405,40 @@ The price and the contact address are `PRICE` and `CONTACT_EMAIL` consts in the 
 the mailto links are built from them.
 
 **To change the About copy or the engagements list**, both are consts at the top of
-`components/About.tsx`.
+`components/About.tsx`. Note that `resume/data/musical.ts` exports its own `engagements`, the
+same jobs written as résumé rows with names and dates where this one is four short phrases.
+They drift; update both.
 
 ### Résumé (`app/resume/`)
 
 The page is HTML, not an embedded PDF. It used to be an `<iframe>`, which iOS Safari refuses to
 render, so the PDF is now only the download button.
 
-Everything on the page comes from `data/resume.ts`, which exports `profile`, `education`,
-`skillGroups`, `projects`, `experience`, and `leadership`. Each is a plain object or array;
-append or edit in place.
+**There are two résumés**, and `page.tsx` renders neither of them. It hands off to
+`ResumeSwitch`, a client component holding the tab state, which renders `TechnicalResume` and
+`MusicalResume` in `TabPanel`s. State only, with no route and no query param, so a link can
+point at `/resume` but not at one of the two.
+
+| To change | Edit |
+| --- | --- |
+| Technical content | `data/resume.ts` |
+| Musical content | `data/musical.ts` |
+| Anything both share (cards, rules, bullets, contact row) | `components/paper.tsx` |
+| The tab labels or which résumé opens first | the `tabs` array in `ResumeSwitch.tsx` |
+
+**`paper.tsx` is what keeps the two documents in step.** Both résumés are the same layout with
+a different accent and a different display face, so `Card`, `Entry`, `Bullets`, `OrgLine`,
+`Dates`, `Note`, `ContactLink`, and `ContactRow` live there once and take a `tone` prop:
+`resume` (Fraunces, résumé yellow) or `music` (Cormorant italic, musical green). The rule in
+the file header is the one to keep. If a change cannot be expressed as a token swap in `tones`,
+it belongs in the calling résumé, not in `paper.tsx`.
+
+The two headers are deliberately the same shape: name, pronouns, contact row, download button.
+Neither carries a tagline or a summary paragraph.
+
+`data/resume.ts` exports `profile`, `education`, `skillGroups`, `projects`, `experience`, and
+`leadership`. `data/musical.ts` exports `profile`, `training`, `creditGroups`, `engagements`,
+`leadership`, and `specialSkills`. Each is a plain object or array; append or edit in place.
 
 `skillGroups` takes two shapes. `items` is either a single string, or an array of
 `{ sub, text }` for a group that needs labelled sub-lines:
@@ -415,9 +448,15 @@ append or edit in place.
 { label: "Full-Stack", items: [{ sub: "Front-End", text: "React, TypeScript" }] },
 ```
 
-**To swap the PDF**, drop the new file in `public/` and update the `href` in `page.tsx`. If the
-filename is unchanged, nothing else needs to move. Keep the HTML and the PDF saying the same
-thing; they drift easily.
+`creditGroups` is the `/musical` credit list re-cut by department (Music Direction, Pit &
+Accompaniment, Staging & Production) with each role string shortened to one line. The credits
+*page* keeps the full multi-hat wording because it is the complete list rather than a
+selection, so a new credit usually needs adding in both `musical/data/credits.ts` and here.
+
+**To swap a PDF**, drop the new file in `public/` and update the `href`, which lives in
+`TechnicalResume.tsx` / `MusicalResume.tsx`, not in `page.tsx`. If the filename is unchanged,
+nothing else moves. Keep each HTML résumé and its PDF saying the same thing; they drift easily,
+and there are now two pairs to keep in step.
 
 ### Contact (`app/contact/`)
 

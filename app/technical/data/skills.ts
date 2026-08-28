@@ -1,6 +1,6 @@
 /**
- * The skill tree, as lanes of tiers rather than absolute pixel coordinates —
- * layout is computed from this shape, so nothing here is a position.
+ * The skill tree, as lanes of tiers rather than absolute pixel coordinates.
+ * Layout is computed from this shape, so nothing here is a position.
  * See docs/REVAMP-SPEC.md §6.
  *
  * Lanes and nodes mirror the Claude Design skill-tree mockup exactly, down to
@@ -10,7 +10,7 @@
  * it enabled below it.
  *
  * `blurb` is deliberately how-and-why, never what. "React" does not say "a
- * JavaScript library" — it says where it was used and what it made possible.
+ * JavaScript library", it says where it was used and what it made possible.
  */
 
 export const TIERS = { 1: "Learning", 2: "Working", 3: "Fluent" } as const;
@@ -19,7 +19,7 @@ export type Tier = keyof typeof TIERS;
 
 export type Skill = {
   id: string;
-  /** 1–2 characters — it has to fit the pixel marker. */
+  /** 1–2 characters, because it has to fit the pixel marker. */
   abbr: string;
   label: string;
   tier: Tier;

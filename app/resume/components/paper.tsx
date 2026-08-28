@@ -1,10 +1,10 @@
 /**
- * The shared furniture of both résumés. /resume renders two documents — the
- * technical one and the musical one — and they are the same document with a
+ * The shared components of both résumés. /resume renders two documents (the
+ * technical one and the musical one) and they are the same document with a
  * different accent and a different display face, so the cards, rules, bullets,
- * and contact row live here once and take a `tone`.
+ * and contact row live here once and take a `tone` prop to vary their appearance.
  *
- * Tone is the *only* thing that varies. If a change here can't be expressed as
+ * Tone is the *only* thing here that varies. If a change here can't be expressed as
  * a token swap in `tones`, it belongs in the calling résumé instead.
  */
 import { cn } from "@/lib/utils";
@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 export type Tone = keyof typeof tones;
 
 const tones = {
-  /* Fraunces + the résumé yellow, per docs/REVAMP-SPEC.md §6. */
+  /* Fraunces + the résumé yellow */
   resume: {
     display: "font-display",
     heading: "font-display text-[19px] font-semibold tracking-tight",
@@ -21,7 +21,8 @@ const tones = {
     ring: "focus-visible:ring-resume-deep",
   },
   /* Cormorant + the musical green. Cormorant sets small for its point size, so
-     the card headings run 4px larger than Fraunces at the same rank. */
+     the card headings run 4px larger than Fraunces at the same rank for more
+     consistency */
   music: {
     display: "font-score italic",
     heading: "font-score text-[23px] font-semibold tracking-tight italic",
@@ -88,7 +89,7 @@ export function Bullets({ items, tone }: { items: string[]; tone: Tone }) {
   );
 }
 
-/** The small-caps organisation line that heads an experience or credit entry. */
+/** The small-caps Organization line that heads a respective experience or credit entry. */
 export function OrgLine({ children }: { children: React.ReactNode }) {
   return (
     <p className="text-[13.5px] font-medium tracking-wide text-ink-soft uppercase">

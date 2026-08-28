@@ -1,7 +1,7 @@
 import { ClipboardList, PenLine, Piano } from "lucide-react";
 import { credits } from "../data/credits";
 
-/** A credit can wear more than one hat, so each department it touches adds a glyph. */
+/** A credit can wear more than one hat, so each department it touches adds a glyph icon. */
 const departments = [
   {
     id: "keys",
@@ -15,7 +15,7 @@ const departments = [
 const glyphs = (role: string) =>
   departments.filter(({ test }) => test.test(role.toLowerCase()));
 
-/* Fixed tracks, not `auto`: the header and the rows are separate grid
+/* fixed tracks, not `auto`: the header and the rows are separate grid
    containers, so an `auto` column resolves to a different width in each and
    the headings drift off their values. */
 const columns = "sm:grid-cols-[2fr_64px_1.9fr_1.6fr_1.4fr]";
@@ -39,7 +39,7 @@ export default function Credits() {
       <ul>
         {credits.map((credit) => (
           /* items-start, not items-baseline: a two-line production title must
-             still line up with the top of its role, company, and credit. */
+             still line up with the top of its role, company, and credit (thank you Great Comet) */
           <li
             key={`${credit.title} ${credit.year}`}
             className={`grid items-start gap-0.5 border-b border-ink-soft/15 px-1 py-3 sm:gap-4 sm:py-2.5 ${columns}`}

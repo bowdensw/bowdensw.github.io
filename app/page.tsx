@@ -38,7 +38,7 @@ export default function LandingPage() {
           </p>
 
           {/* The single row exists to stage the hover icons, which no touch
-              device will ever see — so small screens get a 2×2 grid of
+              device will ever see, so small screens get a 2×2 grid of
               properly tappable targets instead of four cramped chips. */}
           <nav
             aria-label="Sections"
@@ -59,7 +59,7 @@ export default function LandingPage() {
 
                 {/* --glow resolves to this entry's accent token, so one class
                     covers all four. The drop-shadow is applied on hover rather
-                    than transitioned — filters aren't cheap to animate. */}
+                    than transitioned, since filters aren't cheap to animate. */}
                 <span
                   aria-hidden="true"
                   className="pointer-events-none absolute top-full left-1/2 mt-2.5 -translate-x-1/2"

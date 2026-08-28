@@ -2,8 +2,8 @@
  * Single source of truth for site navigation.
  *
  * `accent` is the Tailwind color token used for the active-link underline in
- * <SiteNav>. It is the only place section color appears in the site chrome —
- * see docs/REVAMP-SPEC.md §2.
+ * <SiteNav>. It is the only place section color appears in the site chrome.
+ * See docs/REVAMP-SPEC.md §2.
  */
 export type Route = {
   href: string;

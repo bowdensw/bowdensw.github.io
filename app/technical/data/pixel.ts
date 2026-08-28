@@ -15,7 +15,7 @@ import type { PixelLayer } from "@/components/PixelSprite";
 
 /**
  * Pixel art for the Technical header and the skill-tree lane headings, taken
- * straight from PxlKit's parallax pack (MIT, free with attribution — see the
+ * straight from PxlKit's parallax pack (MIT, free with attribution; see the
  * credit line in SkillTree.tsx and docs/REVAMP-SPEC.md §4).
  *
  * These layer stacks used to be transcribed into this file by hand from the
@@ -23,7 +23,7 @@ import type { PixelLayer } from "@/components/PixelSprite";
  * is no second copy to drift.
  *
  * PxlKit ships its own <ParallaxPxlKitIcon>, but it has no
- * prefers-reduced-motion handling and this site leans on motion — so the data
+ * prefers-reduced-motion handling and this site leans on motion, so the data
  * goes through <PixelSprite>, which stops at frame 0 when motion is reduced.
  *
  * Two shapes arrive here. The parallax pack stacks layers for mouse-tracked
@@ -50,7 +50,7 @@ function toLayers(icon: ParallaxPxlKitData | AnyIcon): PixelLayer[] {
 
 /**
  * The two objects flanking the Technical heading: the work on the left, the
- * reason for it on the right. Both are drawn in `./icons` rather than imported —
+ * reason for it on the right. Both are drawn in `./icons` rather than imported.
  * PxlKit ships no computer and no gamepad, and its RetroTV came in the pack's
  * grey-and-green retro palette, which never belonged over a purple page.
  */
@@ -73,7 +73,7 @@ export const HEADER_SPRITES = {
  * and a gear. The last three are PxlKit's, kept because a joystick, an eye and a
  * heart already read as the thing.
  *
- * A lane missing from this map crashes the tree — `PixelSprite` reads
+ * A lane missing from this map crashes the tree, because `PixelSprite` reads
  * `layers[0]` unguarded.
  */
 export const LANE_ICONS: Record<string, PixelLayer[]> = {
